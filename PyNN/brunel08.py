@@ -110,13 +110,9 @@ cell_params = {'tau_m'      : tauMem,
 extra = {}
 
 rank = setup(timestep=dt, max_delay=delay, **extra)
-print 'rank', rank
 np = num_processes()
-print 'np', np
 import socket
 host_name = socket.gethostname()
-print 'host name', host_name
-print "Host #%d is on %s" % (rank+1, host_name)
 
 if extra.has_key('threads'):
     print "%d Initialising the simulator with %d threads..." %(rank, extra['threads'])
@@ -141,7 +137,7 @@ I_net = Population(NI, IF_curr_alpha, cell_params, label="I_net")
 
 print "%d Initialising membrane potential to random values between %g mV and %g mV." % (rank, U0, theta)
 uniformDistr = RandomDistribution('uniform', [U0, theta], rng)
-#E_net.initialize('v', uniformDistr)
+
 E_net.initialize(v=uniformDistr)
 I_net.initialize(v=uniformDistr)
 
@@ -153,45 +149,35 @@ inpoisson = Population(NI, SpikeSourcePoisson, {'rate': p_rate}, "inpoisson")
 
 # Record spikes
 print "%d Setting up recording in excitatory population." % rank
-#E_net.record(Nrec)
+
 E_net.sample(Nrec).record('spikes', Nrec) # Sample at Nrec neurons at random
-E_net[[0, 1]].record_v() # Create
+E_net[[0, 1]].record('v') # Create a view and then record 
 
 print "%d Setting up recording in inhibitory population." % rank
 I_net[0:Nrec].record('spikes') # Here you take a view of the first Nrec neurons
-I_net[[0, 1]].record_v()
-
-#E_Connector = FixedProbabilityConnector(epsilon, weight=JE, delay=delay, verbose=True)
-#I_Connector = FixedProbabilityConnector(epsilon, weight=JI, delay=delay, verbose=True)
-#ext_Connector = OneToOneConnector(weights=JE, delays=dt, verbose=True)
+I_net[[0, 1]].record('v')
 
 print "%d Connecting excitatory population with connection probability %g, weight %g nA and delay %g ms." % (rank, epsilon, JE, delay)
-#E_to_E = Projection(E_net, E_net, E_Connector, rng=rng, target="excitatory")
 E_to_E = Projection(E_net, E_net, FixedProbabilityConnector(p_connect=epsilon, rng=rng), 
                     StaticSynapse(weight=JE, delay=delay), receptor_type='excitatory')
 
 print "E --> E\t\t", len(E_to_E), "connections"
-#I_to_E = Projection(I_net, E_net, I_Connector, rng=rng, target="inhibitory")
 I_to_E = Projection(I_net, E_net, FixedProbabilityConnector(p_connect=epsilon, rng=rng),
                     StaticSynapse(weight=JI, delay=delay), receptor_type='inhibitory') 
 
 print "I --> E\t\t", len(I_to_E), "connections"
-#input_to_E = Projection(expoisson, E_net, ext_Connector, target="excitatory")
 input_to_E = Projection(expoisson, E_net, OneToOneConnector(), StaticSynapse(weight=JE, delay=dt), receptor_type='excitatory')
 print "input --> E\t", len(input_to_E), "connections"
 
 print "%d Connecting inhibitory population with connection probability %g, weight %g nA and delay %g ms." % (rank, epsilon, JI, delay)
-# 
 E_to_I = Projection(E_net, I_net, FixedProbabilityConnector(p_connect=epsilon, rng=rng), 
                     StaticSynapse(weight=JE, delay=delay), receptor_type='excitatory')
 
 print "E --> I\t\t", len(E_to_I), "connections"
-
 I_to_I = Projection(I_net, I_net, FixedProbabilityConnector(p_connect=epsilon, rng=rng),
                     StaticSynapse(weight=JI, delay=delay), receptor_type='inhibitory')
 
 print "I --> I\t\t", len(I_to_I), "connections"
-
 input_to_I = Projection(inpoisson, I_net, OneToOneConnector(), StaticSynapse(weight=JE, delay=dt), receptor_type='excitatory')
 
 print "input --> I\t", len(input_to_I), "connections"
