@@ -18,6 +18,7 @@ install:
     - pip install git+https://github.com/OpenSourceBrain/osb-model-validation
 
 script:
+    - pwd
     - omv all -V
     
     
