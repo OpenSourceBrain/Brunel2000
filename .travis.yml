@@ -7,6 +7,12 @@ python: 2.7
 env:
     - OMV_ENGINE=PyNN_Brian1
     - OMV_ENGINE=PyNN_NEURON
+    
+virtualenv:
+    system_site_packages: true
+    
+before_install:
+    - sudo apt-get install -qq python-numpy python-scipy python-matplotlib python-sympy
 
 install: 
     - pip install git+https://github.com/OpenSourceBrain/osb-model-validation
