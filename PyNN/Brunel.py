@@ -159,19 +159,23 @@ I_net[[0, 1]].record_v()
 E_Connector = FixedProbabilityConnector(epsilon, weights=JE, delays=delay, verbose=True)
 I_Connector = FixedProbabilityConnector(epsilon, weights=JI, delays=delay, verbose=True)
 ext_Connector = OneToOneConnector(weights=JE, delays=dt, verbose=True)
+stdp_model = STDPMechanism(
+    timing_dependence=SpikePairRule(tau_plus=20.0, tau_minus=20.0),
+    weight_dependence=AdditiveWeightDependence(w_min=0, w_max=0.02,
+                                               A_plus=0.01, A_minus=0.012))
 
-print "%d Connecting excitatory population with connection probability %g, weight %g nA and delay %g ms." % (rank, epsilon, JE, delay)
-E_to_E = Projection(E_net, E_net, E_Connector, rng=rng, target="excitatory")
+#print "%d Connecting excitatory population with connection probability %g , weight %g nA and delay %g ms." % (rank, epsilon, JE, delay)
+E_to_E = Projection(E_net, E_net, E_Connector,synapse_dynamics=SynapseDynamics(slow=stdp_model), rng=rng, target="excitatory")
 print "E --> E\t\t", len(E_to_E), "connections"
-I_to_E = Projection(I_net, E_net, I_Connector, rng=rng, target="inhibitory")
+I_to_E = Projection(I_net, E_net, I_Connector,synapse_dynamics=SynapseDynamics(slow=stdp_model), rng=rng, target="inhibitory")
 print "I --> E\t\t", len(I_to_E), "connections"
 input_to_E = Projection(expoisson, E_net, ext_Connector, target="excitatory")
 print "input --> E\t", len(input_to_E), "connections"
 
 print "%d Connecting inhibitory population with connection probability %g, weight %g nA and delay %g ms." % (rank, epsilon, JI, delay)
-E_to_I = Projection(E_net, I_net, E_Connector, rng=rng, target="excitatory")
+E_to_I = Projection(E_net, I_net, E_Connector,synapse_dynamics=SynapseDynamics(slow=stdp_model), rng=rng, target="excitatory")
 print "E --> I\t\t", len(E_to_I), "connections"
-I_to_I = Projection(I_net, I_net, I_Connector, rng=rng, target="inhibitory")
+I_to_I = Projection(I_net, I_net, I_Connector,synapse_dynamics=SynapseDynamics(slow=stdp_model), rng=rng, target="inhibitory")
 print "I --> I\t\t", len(I_to_I), "connections"
 input_to_I = Projection(inpoisson, I_net, ext_Connector, target="excitatory")
 print "input --> I\t", len(input_to_I), "connections"
