@@ -1,0 +1,18 @@
+<neuroml2>
+  <iafRefCell id="iaf" C="250pF" thresh="1mV" reset="-1mV" leakConductance="12.5nS" leakReversal="0mV" refract="2ms"/>
+
+  <alphaCurrentSynapse id="alphaSyn" tauSyn="1.0ms"/>
+
+  <spikeArray id="spks">
+    <spike id="0" time="100 ms"/>
+    <spike id="1" time="120 ms"/>
+    <spike id="2" time="126 ms"/>
+    <spike id="3" time="135 ms"/>
+  </spikeArray>
+
+  <network id="net">
+    <population component="iaf" id="iafPop" size="1"/>
+    <population id="spksPop" component="spks" size="1"/>
+    <synapticCurrentWeightDelay from="spksPop[0]" to="iafPop[0]" synapse="alphaSyn" destination="synapses" weight="0.05 nA" delay="1ms"/>
+  </network>
+</neuroml2>

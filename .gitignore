@@ -1,3 +1,5 @@
 /PyNN/test.py
 PyNN/*.*ml
 PyNN/Results/*.*
+NeuroML2/*.dat
+NeuroML2/results
