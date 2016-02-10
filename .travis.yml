@@ -6,6 +6,7 @@ python: 2.7
 
 env:
     - OMV_ENGINE=PyNN_Nest
+    - OMV_ENGINE=PyNEST
     - OMV_ENGINE=PyNN_NEURON
     
 virtualenv:
