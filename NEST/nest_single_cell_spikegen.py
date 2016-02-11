@@ -22,7 +22,7 @@ neuron_params = {"C_m":        CMem,
                  "V_th":       theta}
 
 nest.SetKernelStatus({"resolution": dt, "print_time": True,
-	 "overwrite_files": True, "data_path": "/tmp"})
+	 "overwrite_files": True, "data_path": "."})
 
 print("Building network")
 nest.SetDefaults("iaf_psc_alpha", neuron_params)
@@ -57,5 +57,5 @@ rate_ex = events_ex / simtime * 1000.0
 print("Brunel network simulation (Python)")
 print("Excitatory rate   : %.2f Hz" % rate_ex)
 
-#nest.voltage_trace.from_device(voltmeter)
+nest.voltage_trace.from_device(voltmeter)
 #nest.raster_plot.from_device(espikes, hist=True)

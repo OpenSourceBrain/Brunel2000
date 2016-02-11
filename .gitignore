@@ -4,3 +4,4 @@ PyNN/Results/*.*
 NeuroML2/*.dat
 NeuroML2/results
 NEST/*.gdf
+/NEST/nest_v-4-0.dat

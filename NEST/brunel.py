@@ -1,5 +1,4 @@
 import nest
-import nest.raster_plot
 from scipy.special import lambertw
 
 import numpy
@@ -143,4 +142,6 @@ print("Inhibitory rate   : %.2f Hz" % rate_in)
 print("Building time     : %.2f s" % build_time)
 print("Simulation time   : %.2f s" % sim_time)
 
-nest.raster_plot.from_device(espikes, hist=True)
+
+#import nest.raster_plot
+#nest.raster_plot.from_device(espikes, hist=True)
