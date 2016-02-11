@@ -23,6 +23,7 @@ virtualenv:
     system_site_packages: true
     
 env:
+    - OMV_ENGINE=PyNEST
     - OMV_ENGINE=PyNN_Nest
     - OMV_ENGINE=PyNN_NEURON
 
