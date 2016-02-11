@@ -343,9 +343,9 @@ def _spikingNetwork_(g=5., eta=2.):
 N = NE+NI
 
 ## ratio inhibitory weight/excitatory weight
-g_rng = np.arange(3, 9, .5)
+g_rng = np.arange(3, 9, 1.)
 ## external rate relative to threshold rate
-eta_rng = np.arange(.5, 4., .5)
+eta_rng = np.arange(.5, 4., 1.)
 
 sim_run = 1
 
