@@ -6,3 +6,5 @@ NeuroML2/results
 NEST/*.gdf
 /NEST/nest_v-4-0.dat
 /NEST/results
+/PyNN/E_net_v.dat
+/PyNN/I_net_v.dat
