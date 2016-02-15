@@ -14,7 +14,7 @@ from pyNN.random import NumpyRNG, RandomDistribution
 from neo.io import PyNNTextIO
 
 
-def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsilon = 0.1, order = 2500, N_rec = 50, save=False, simulator_name='NEST'):
+def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsilon = 0.1, order = 2500, N_rec = 50, save=False, simulator_name='nest'):
 
     exec("from pyNN.%s import *" % simulator_name) in globals()
 

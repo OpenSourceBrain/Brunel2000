@@ -5,25 +5,35 @@ from neuroml import IafRefCell
 from neuroml import Network
 from neuroml import AlphaCurrentSynapse
 from neuroml import Population
-from neuroml import SynapticCurrentWeightDelay
+from neuroml import Projection
+from neuroml import ConnectionWD
 from neuroml import SpikeArray
 from neuroml import Spike
 import neuroml.writers as writers
 
 
 def create_nml():
-    nml_doc = NeuroMLDocument(id="IafNet")
+    nml_doc = NeuroMLDocument(id="Brunel")
     iaf = create_iaf_cell()
     nml_doc.iaf_ref_cells.append(iaf)
 
-    alpha_syn = create_alpha_syn()
-    nml_doc.alpha_current_synapses.append(alpha_syn)
-
     noise = create_inputs()
     nml_doc.spike_arrays.append(noise)
+    
+    tauSyn = 0.5 # ms
 
-    net = create_network(iaf, alpha_syn, noise)
+    alpha_syn_ex = create_alpha_syn('alpha_syn_ex', tauSyn, 0)
+    nml_doc.alpha_current_synapses.append(alpha_syn_ex)
+
+    alpha_syn_ih = create_alpha_syn('alpha_syn_in', tauSyn, 0)
+    nml_doc.alpha_current_synapses.append(alpha_syn_ih)
+    
+    net, ex_ibase, in_ibase = create_network(iaf, tauSyn, alpha_syn_ex, alpha_syn_ih, noise)
     nml_doc.networks.append(net)
+    
+    alpha_syn_ex.ibase = ex_ibase
+    alpha_syn_ih.ibase = in_ibase
+    
 
     nml_file = './brunel2000_mini.nml'
     writers.NeuroMLWriter.write(nml_doc, nml_file)
@@ -31,13 +41,13 @@ def create_nml():
 #    validate_neuroml2(nml_file)
 
 
-def create_network(cell, synapse, inputs):
+def create_network(cell, tauSyn, syn_ex, syn_ih, inputs):
 
     g = 5.0  # ratio inhibitory weight/excitatory weight
     eta = 2.0  # external rate relative to threshold rate
     epsilon = 0.1  # connection probability
 
-    order = 100
+    order = 10
     NE = 4*order  # number of excitatory neurons
     NI = 1*order  # number of inhibitory neurons
     N_neurons = NE+NI   # number of neurons in total
@@ -57,20 +67,26 @@ def create_network(cell, synapse, inputs):
 
     g = 5.0  # ratio inhibitory weight/excitatory weight
     J = 0.1  # postsynaptic amplitude in mV
-    J_unit = computePSPnorm(cell.tauMem, cell.CMem, synapse.tauSyn)
+    J_unit = computePSPnorm(cell.tauMem, cell.CMem, tauSyn)
     J_ex = J / J_unit  # amplitude of excitatory postsynaptic current
     J_in = -g * J_ex   # amplitude of inhibitory postsynaptic current
 
-    ex_weight = str(J_ex) + 'nA'
-    in_weight = str(J_in) + 'nA'
+    ex_ibase = str(J_ex) + 'nA'
+    in_ibase = str(J_in) + 'nA'
     delay = "1.5 ms"
+    
+    proj = Projection(id="Proj0", synapse=syn_ex.id,
+                        presynaptic_population=noise.id, 
+                        postsynaptic_population=nodes_ex.id)
+                        
+    net.projections.append(proj)
+    
+    proj.connection_wds.extend(
+        all_to_all(noise, nodes_ex, syn_ex, 1, delay))
 
-    net.synaptic_current_weight_delays.extend(
-        all_to_all(noise, nodes_ex, synapse, ex_weight, delay))
-
-    net.synaptic_current_weight_delays.extend(
-        all_to_all(noise, nodes_inh, synapse, in_weight, delay))
-
+    #net.synaptic_current_weight_delays.extend(
+    #    all_to_all(noise, nodes_inh, synapse, in_weight, delay))
+    '''
     random.seed(1234)
     sources_ex = random.random_integers(1, NE, (N_neurons, CE))
     sources_in = random.random_integers(NE+1, N_neurons, (N_neurons, CI))
@@ -79,20 +95,20 @@ def create_network(cell, synapse, inputs):
     ex_in = sources_ex[NE:] - 1
     in_ex = sources_in[:NE] - NE - 1
     in_in = sources_in[NE:] - NE - 1
+    
+    net.synaptic_current_weight_delays.extend(
+        connect_from_list(ex_ex, 'nodes_ex', 'nodes_ex', synapse, 1, delay))
 
     net.synaptic_current_weight_delays.extend(
-        connect_from_list(ex_ex, 'nodes_ex', 'nodes_ex', synapse, ex_weight, delay))
+        connect_from_list(ex_in, 'nodes_ex', 'nodes_inh', synapse, 1, delay))
 
     net.synaptic_current_weight_delays.extend(
-        connect_from_list(ex_in, 'nodes_ex', 'nodes_inh', synapse, ex_weight, delay))
+        connect_from_list(in_ex, 'nodes_inh', 'nodes_ex', synapse, 1, delay))
 
     net.synaptic_current_weight_delays.extend(
-        connect_from_list(in_ex, 'nodes_inh', 'nodes_ex', synapse, in_weight, delay))
+        connect_from_list(in_in, 'nodes_inh', 'nodes_inh', synapse, 1, delay))'''
 
-    net.synaptic_current_weight_delays.extend(
-        connect_from_list(in_in, 'nodes_inh', 'nodes_inh', synapse, in_weight, delay))
-
-    return net
+    return net, ex_ibase, in_ibase
 
 
 def connect_from_list(from_list, from_name, to_name, synapse, weight, delay):
@@ -110,15 +126,17 @@ def connect_from_list(from_list, from_name, to_name, synapse, weight, delay):
 
 def all_to_all(pre, post, synapse, weight, delay):
     from itertools import product
+    count=-1
     for ipre, ipost in product(xrange(pre.size), xrange(post.size)):
+        count+=1
         fr = "%s[%i]" % (pre.id, ipre)
         to = "%s[%i]" % (post.id, ipost)
-        yield synaptic_connection(fr, to, synapse.id, weight, delay)
+        yield synaptic_connection(id=count,pre_cell_id=fr, post_cell_id=to,weight=weight, delay=delay)
 
 
-def synaptic_connection(from_path, to_path, synapse_id, weight, delay):
-    return SynapticCurrentWeightDelay(from_=from_path, to=to_path, delay=delay,
-                                      weight=weight, synapse=synapse_id)
+def synaptic_connection(id,pre_cell_id, post_cell_id, weight, delay):
+    return ConnectionWD(id=id,pre_cell_id=pre_cell_id, post_cell_id=post_cell_id, delay=delay,
+                                      weight=weight)
 
 
 def create_inputs():
@@ -136,12 +154,10 @@ def create_inputs():
     return spks
 
 
-def create_alpha_syn():
+def create_alpha_syn(id, tauSyn, ibase):
 
-    tauSyn = 0.5  # synaptic time constant in ms
     tau = str(tauSyn) + 'ms'
-    alpha = AlphaCurrentSynapse(id="alpha_syn", tau_syn=tau)
-    alpha.tauSyn = tauSyn
+    alpha = AlphaCurrentSynapse(id=id, tau=tau, ibase=ibase)
     return alpha
 
 

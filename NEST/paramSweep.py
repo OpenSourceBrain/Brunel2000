@@ -51,10 +51,7 @@ import numpy as np
 import pylab as pl
 
 
-from brunel_delta_nest import runBrunelNetwork as runBrunelNetworkDelta
-from brunel_alpha_nest import runBrunelNetwork as runBrunelNetworkAlpha
-
-def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500):
+def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, simulator_name=None):
     ## ratio inhibitory weight/excitatory weight
     g_rng = np.arange(3, 9, 1.)
     ## external rate relative to threshold rate
@@ -76,7 +73,7 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500):
                 print('')
                 print('############# (Running with params: g=%s, eta=%s; %s/%s): '% (g, eta, count, len(g_rng)*len(eta_rng)))
                 count+=1
-                all_spikes = runBrunelNetwork(g=g, eta=eta, simtime=simtime, order=order)
+                all_spikes = runBrunelNetwork(g=g, eta=eta, simtime=simtime, order=order, simulator_name=simulator_name)
 
                 ta0 = time.time()
 
@@ -164,7 +161,15 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500):
 if __name__ == '__main__':
     
     simtime = 1000.0
-    order = 1000
+    order = 2500
+    
+
+    from brunel_delta_nest import runBrunelNetwork as runBrunelNetworkDelta
+    from brunel_alpha_nest import runBrunelNetwork as runBrunelNetworkAlpha
+    
+    sys.path.append("../PyNN")
+    from brunel08 import runBrunelNetwork as runBrunelNetworkPyNN
     
     runParameterSweep(runBrunelNetworkDelta, "delta", simtime=simtime, order=order)
     runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=simtime, order=order)
+    #runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=simtime, order=order, simulator_name='nest')
