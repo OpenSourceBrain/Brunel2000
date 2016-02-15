@@ -1,18 +1,21 @@
-<neuroml2>
-  <iafRefCell id="iaf" C="250pF" thresh="1mV" reset="-1mV" leakConductance="12.5nS" leakReversal="0mV" refract="2ms"/>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="IafNet">
+ 
+    <alphaCurrentSynapse id="alphaSyn" tau="1.0ms" ibase="0.05 nA"/>
 
-  <alphaCurrentSynapse id="alphaSyn" tauSyn="1.0ms"/>
+    <iafRefCell id="iaf" C="250pF" thresh="1mV" reset="-1mV" leakConductance="12.5nS" leakReversal="0mV" refract="2ms"/>
 
-  <spikeArray id="spks">
-    <spike id="0" time="100 ms"/>
-    <spike id="1" time="120 ms"/>
-    <spike id="2" time="126 ms"/>
-    <spike id="3" time="135 ms"/>
-  </spikeArray>
+    <spikeArray id="spks">
+        <spike id="0" time="100 ms"/>
+        <spike id="1" time="120 ms"/>
+        <spike id="2" time="126 ms"/>
+        <spike id="3" time="135 ms"/>
+    </spikeArray>
 
-  <network id="net">
-    <population component="iaf" id="iafPop" size="1"/>
-    <population id="spksPop" component="spks" size="1"/>
-    <synapticCurrentWeightDelay from="spksPop[0]" to="iafPop[0]" synapse="alphaSyn" destination="synapses" weight="0.05 nA" delay="1ms"/>
-  </network>
-</neuroml2>
+    <network id="net">
+        <population component="iaf" id="iafPop" size="1"/>
+        <population id="spksPop" component="spks" size="1"/>
+        <projection id="projection4" presynapticPopulation="spksPop" postsynapticPopulation="iafPop" synapse="alphaSyn">
+            <connectionWD id="0" preCellId="../spksPop[0]" postCellId="../iafPop[0]" weight="1"  delay="1ms" />
+        </projection>
+    </network>
+</neuroml>
