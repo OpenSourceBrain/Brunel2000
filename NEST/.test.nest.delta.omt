@@ -1,4 +1,4 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
  
-target: brunel.py 
+target: brunel_delta_nest.py 
 engine: PyNEST

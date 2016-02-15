@@ -1,4 +1,6 @@
+*~
 /PyNN/test.py
+PyNN/*.gdf
 PyNN/*.*ml
 PyNN/Results/*.*
 NeuroML2/*.dat
