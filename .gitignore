@@ -8,3 +8,4 @@ NEST/*.gdf
 /NEST/results
 /PyNN/E_net_v.dat
 /PyNN/I_net_v.dat
+*.pyc

@@ -40,18 +40,14 @@ network are recorded.
 '''
 Importing all necessary modules for simulation, analysis and plotting.
 '''
-import pickle
 import sys
 
 import nest
 import nest.raster_plot
 
 import time
-import numpy as np
-import pylab as pl
 
-
-def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsilon = 0.1, order = 2500, N_rec = 50):
+def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsilon = 0.1, order = 2500, N_rec = 50, save=False):
 
 
     '''
@@ -182,12 +178,12 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
     nest.SetStatus(espikes,[{"label": "brunel-py-ex",
                              "withtime": True,
                              "withgid": True,
-                             "to_file": False}])
+                             "to_file": save}])
 
     nest.SetStatus(ispikes,[{"label": "brunel-py-in",
                              "withtime": True,
                              "withgid": True,
-                             "to_file": False}])
+                             "to_file": save}])
 
     nest.SetStatus(all_spikes,[{"label": "brunel-py-all",
                              "withtime": True,
@@ -344,109 +340,12 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
 
 ###
 
+if __name__ == '__main__':
 
-## ratio inhibitory weight/excitatory weight
-g_rng = np.arange(3, 9, 1.)
-## external rate relative to threshold rate
-eta_rng = np.arange(.5, 4., 1.)
+    simtime = 1000.0
+    order = 2500
 
-sim_run = 1
+    eta         = 2.0     # rel rate of external input
+    g           = 5.0
 
-simtime = 1000.0
-order = 2500
-NE = order*4
-N = order*5
-
-if sim_run:
-    results = {}
-    ISIcv = {}
-    FF = {}
-    all_rates = {}
-    for i1, g in enumerate(g_rng):
-        for i2, eta in enumerate(eta_rng):
-            print('')
-            print('########## (g, eta): ', g, ' ,', eta)
-
-            all_spikes = runBrunelNetwork(g=g, eta=eta, simtime=simtime, order=order)
-
-            ta0 = time.time()
-
-            spd_all = nest.GetStatus(all_spikes)[0]['events']
-
-            all_rates[g, eta] = np.histogram(spd_all['senders'], range=(1,N), bins=N)[0]
-
-            binw=1. #ms
-            pop_rate = np.histogram(spd_all['times'], range=(0,simtime), bins=simtime/binw)[0] / (binw/1000.)/ N
-
-            FF[g, eta] = np.var(pop_rate) / np.mean(pop_rate)
-
-            isi_cv = np.zeros(N)
-            for ii in range(N):
-                nid = ii+1
-                spids = np.where(spd_all['senders'] == nid)
-                isi = np.diff(spd_all['times'][spids])
-                isi_cv[ii] = np.std(isi)/ np.mean(isi)
-
-            ISIcv[g, eta] = isi_cv
-
-            taf = time.time()
-            print("Analysis time   : %.2f s" % (taf-ta0))
-
-
-    results['FF'] = FF
-    results['ISIcv'] = ISIcv
-    results['all_rates'] = all_rates
-
-    fl = open('results', 'wb')
-    pickle.dump(results, fl)
-    fl.close()
-else:
-    fl = open('results', 'rb')
-    results = pickle.load(fl)
-    fl.close()
-
-    FF = results['powspect']
-    ISIcv = results['powmean']
-    all_rates = results['all_rates']
-
-###
-
-# synchrony
-S = np.zeros((len(g_rng), len(eta_rng)))
-# irregularity
-I = np.zeros((len(g_rng), len(eta_rng)))
-
-Rexc = np.zeros((len(g_rng), len(eta_rng)))
-Rinh = np.zeros((len(g_rng), len(eta_rng)))
-
-for i1, g in enumerate(g_rng):
-        for i2, eta in enumerate(eta_rng):
-            I[i1,i2] = np.mean(ISIcv[g,eta])
-            S[i1,i2] = FF[g,eta]
-
-            Rexc[i1,i2] = np.mean(all_rates[g,eta][0:NE])
-            Rinh[i1,i2] = np.mean(all_rates[g,eta][NE:])
-
-def _plot_(X, sbplt=111, ttl=[]):
-    ax = pl.subplot(sbplt)
-    pl.title(ttl)
-    pl.imshow(X, origin='lower', interpolation='none')
-    pl.xlabel('g')
-    pl.ylabel(r'$\nu_{ext} / \nu_{thr}$')
-    ax.set_xticks(range(0,len(g_rng))); ax.set_xticklabels(g_rng)
-    ax.set_yticks(range(0,len(eta_rng))); ax.set_yticklabels(eta_rng)
-    pl.colorbar()
-
-pl.figure(figsize=(16,8))
-
-_plot_(Rexc.T, 221, 'Rates Exc')
-_plot_(Rinh.T, 222, 'Rates Inh')
-
-_plot_(S.T, 223, 'Synchrony (FF)')
-_plot_(I.T, 224, 'Irregularity (ISI CV)')
-
-pl.subplots_adjust(wspace=.3, hspace=.3)
-
-pl.savefig('NEST_delta_N%s_%sms.png'%(N,simtime), bbox_inches='tight')
-
-pl.show()
+    runBrunelNetwork(g=g, eta=eta, simtime = simtime, order = order, save=True)
