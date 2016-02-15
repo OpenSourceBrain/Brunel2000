@@ -50,35 +50,39 @@ import time
 import numpy as np
 import pylab as pl
 
-'''
-Assigning the simulation parameters to variables.
-'''
 
-dt      = 0.1    # the resolution in ms
-simtime = 1000.0 # Simulation time in ms
-delay   = 1.5    # synaptic delay in ms
+def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsilon = 0.1, order = 2500, N_rec = 50):
 
-'''
-Definition of the parameters crucial for asynchronous irregular firing
-of the neurons.
-'''
 
-#g       = 5.0  # ratio inhibitory weight/excitatory weight
-#eta     = 2.0  # external rate relative to threshold rate
-epsilon = 0.1  # connection probability
+    '''
+    Assigning the simulation parameters to variables.
+    '''
 
-'''
-Definition of the number of neurons in the network and the number of
-neuron recorded from
-'''
+    dt      = dt    # the resolution in ms
+    simtime = simtime # Simulation time in ms
+    delay   = delay    # synaptic delay in ms
 
-order     = 2500
-NE        = 4*order # number of excitatory neurons
-NI        = 1*order # number of inhibitory neurons
-N_neurons = NE+NI   # number of neurons in total
-N_rec     = 50     # record from 50 neurons
+    '''
+    Definition of the parameters crucial for asynchronous irregular firing
+    of the neurons.
+    '''
 
-def _spikingNetwork_(g=5., eta=2.):
+    #g       = 5.0  # ratio inhibitory weight/excitatory weight
+    #eta     = 2.0  # external rate relative to threshold rate
+    epsilon = epsilon  # connection probability
+
+    '''
+    Definition of the number of neurons in the network and the number of
+    neuron recorded from
+    '''
+
+    order     = order
+    NE        = 4*order # number of excitatory neurons
+    NI        = 1*order # number of inhibitory neurons
+    N_neurons = NE+NI   # number of neurons in total
+    N_rec     = N_rec     # record from 50 neurons
+
+
     nest.ResetKernel()
 
     '''
@@ -340,7 +344,6 @@ def _spikingNetwork_(g=5., eta=2.):
 
 ###
 
-N = NE+NI
 
 ## ratio inhibitory weight/excitatory weight
 g_rng = np.arange(3, 9, 1.)
@@ -348,6 +351,11 @@ g_rng = np.arange(3, 9, 1.)
 eta_rng = np.arange(.5, 4., 1.)
 
 sim_run = 1
+
+simtime = 1000.0
+order = 2500
+NE = order*4
+N = order*5
 
 if sim_run:
     results = {}
@@ -359,7 +367,7 @@ if sim_run:
             print('')
             print('########## (g, eta): ', g, ' ,', eta)
 
-            all_spikes = _spikingNetwork_(g=g, eta=eta)
+            all_spikes = runBrunelNetwork(g=g, eta=eta, simtime=simtime, order=order)
 
             ta0 = time.time()
 
@@ -438,5 +446,7 @@ _plot_(S.T, 223, 'Synchrony (FF)')
 _plot_(I.T, 224, 'Irregularity (ISI CV)')
 
 pl.subplots_adjust(wspace=.3, hspace=.3)
+
+pl.savefig('NEST_delta_N%s_%sms.png'%(N,simtime), bbox_inches='tight')
 
 pl.show()
