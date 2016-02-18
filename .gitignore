@@ -11,3 +11,8 @@ NEST/*.gdf
 /PyNN/E_net_v.dat
 /PyNN/I_net_v.dat
 *.pyc
+/NEST/NEST_aplha_N2500_1000.0ms.png
+/NEST/NEST_aplha_N5000_1000.0ms.png
+/NEST/NEST_delta_N12500_2000.0ms.png
+/NEST/NEST_delta_N1250_1000.0ms.png
+/NEST/NEST_delta_N5000_1000.0ms.png
