@@ -43,7 +43,6 @@ Importing all necessary modules for simulation, analysis and plotting.
 import sys
 
 import nest
-import nest.raster_plot
 
 import time
 
@@ -334,6 +333,7 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
     Plot a raster of the excitatory neurons and a histogram.
     '''
 
+    #import nest.raster_plot
     #nest.raster_plot.from_device(espikes, hist=True)
 
     return all_spikes
