@@ -35,7 +35,7 @@ def create_nml():
     alpha_syn_ih.ibase = in_ibase
     
 
-    nml_file = './brunel2000_mini.nml'
+    nml_file = './brunel2000_mini.net.nml'
     writers.NeuroMLWriter.write(nml_doc, nml_file)
 #    from neuroml.utils import validate_neuroml2
 #    validate_neuroml2(nml_file)

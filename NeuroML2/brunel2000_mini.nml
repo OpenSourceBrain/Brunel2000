@@ -1,0 +1,58 @@
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd" id="Brunel">
+    <alphaCurrentSynapse id="alpha_syn_ex" tau="0.5ms" ibase="20.6801552437nA"/>
+    <alphaCurrentSynapse id="alpha_syn_in" tau="0.5ms" ibase="-103.400776218nA"/>
+    <iafRefCell id="iaf" leakReversal="0 mV" thresh="20 mV" reset="0 mV" C="250.0pF" leakConductance="12.5nS" refract="2 ms"/>
+    <spikeArray id="spks">
+        <spike id="0" time="100 ms"/>
+        <spike id="1" time="120 ms"/>
+        <spike id="2" time="126 ms"/>
+        <spike id="3" time="135 ms"/>
+    </spikeArray>
+    <network id="net">
+        <population id="nodes_ex" component="iaf" size="40"/>
+        <population id="nodes_inh" component="iaf" size="10"/>
+        <population id="noise" component="spks" size="1"/>
+        <projection id="Proj0" presynapticPopulation="noise" postsynapticPopulation="nodes_ex" synapse="alpha_syn_ex">
+            <connectionWD id="0" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[0]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="1" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[1]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="2" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[2]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="3" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[3]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="4" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[4]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="5" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[5]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="6" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[6]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="7" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[7]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="8" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[8]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="9" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[9]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="10" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[10]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="11" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[11]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="12" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[12]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="13" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[13]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="14" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[14]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="15" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[15]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="16" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[16]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="17" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[17]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="18" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[18]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="19" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[19]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="20" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[20]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="21" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[21]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="22" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[22]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="23" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[23]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="24" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[24]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="25" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[25]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="26" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[26]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="27" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[27]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="28" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[28]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="29" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[29]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="30" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[30]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="31" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[31]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="32" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[32]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="33" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[33]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="34" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[34]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="35" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[35]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="36" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[36]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="37" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[37]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="38" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[38]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+            <connectionWD id="39" preCellId="noise[0]" preSegmentId="0" preFractionAlong="0.5" postCellId="nodes_ex[39]" postSegmentId="0" postFractionAlong="0.5" weight="1." delay="1.5 ms"/>
+        </projection>
+    </network>
+</neuroml>
