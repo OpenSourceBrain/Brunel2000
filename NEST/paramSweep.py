@@ -53,9 +53,9 @@ import pylab as pl
 
 def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, simulator_name=None):
     ## ratio inhibitory weight/excitatory weight
-    g_rng = np.arange(3, 9, 1.)
+    g_rng = np.arange(3, 9, .5)
     ## external rate relative to threshold rate
-    eta_rng = np.arange(.5, 4., 1.)
+    eta_rng = np.arange(.5, 4., .5)
 
     sim_run = 1
 
@@ -145,8 +145,8 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
 
     pl.figure(figsize=(16,8))
 
-    _plot_(Rexc.T, 221, 'Rates Exc')
-    _plot_(Rinh.T, 222, 'Rates Inh')
+    _plot_(Rexc.T, 221, 'Rates Exc (Hz)')
+    _plot_(Rinh.T, 222, 'Rates Inh (Hz)')
 
     _plot_(S.T, 223, 'Synchrony (FF)')
     _plot_(I.T, 224, 'Irregularity (ISI CV)')
