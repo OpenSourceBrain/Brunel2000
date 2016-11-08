@@ -17,8 +17,7 @@ from neo.io import PyNNTextIO
 def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsilon = 0.1, order = 2500, N_rec = 50, save=False, simulator_name='nest'):
 
     exec("from pyNN.%s import *" % simulator_name) in globals()
-
-
+    
     timer = Timer()
 
     # === Define parameters ========================================================
@@ -26,18 +25,18 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
     downscale   = 1       # scale number of neurons down by this factor
                           # scale synaptic weights up by this factor to
                           # obtain similar dynamics independent of size
-    order       = order    # determines size of network:
+    order       = order   # determines size of network:
                           # 4*order excitatory neurons
                           # 1*order inhibitory neurons
-    Nrec        = N_rec      # number of neurons to record from, per population
-    epsilon     = epsilon     # connectivity: proportion of neurons each neuron projects to
+    Nrec        = N_rec   # number of neurons to record from, per population
+    epsilon     = epsilon # connectivity: proportion of neurons each neuron projects to
 
     # Parameters determining model dynamics, cf Brunel (2000), Figs 7, 8 and Table 1
     # here: Case C, asynchronous irregular firing, ~35 Hz
     eta         = eta     # rel rate of external input
-    g           = g     # rel strength of inhibitory synapses
+    g           = g       # rel strength of inhibitory synapses
     J           = 0.1     # synaptic weight [mV]
-    delay       = delay     # synaptic delay, all connections [ms]
+    delay       = delay   # synaptic delay, all connections [ms]
 
     # single neuron parameters
     tauMem      = 20.0    # neuron membrane time constant [ms]
@@ -52,7 +51,7 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
 
     # seed for random generator used when building connections
     connectseed = 12345789
-    use_RandomArray = True # use Python rng rather than NEST rng
+    use_RandomArray = True  # use Python rng rather than NEST rng
 
     # seed for random generator(s) used during simulation
     kernelseed  = 43210987
@@ -76,7 +75,7 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
 
     # synaptic weights, scaled for alpha functions, such that
     # for constant membrane potential, charge J would be deposited
-    fudge = 0.00041363506632638 # ensures dV = J at V=0
+    fudge = 0.00041363506632638  # ensures dV = J at V=0
 
     # excitatory weight: JE = J_eff / tauSyn * fudge
     JE = (J_eff/tauSyn)*fudge
@@ -128,7 +127,7 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
         if rank == 0:
             print(s)
 
-    timer.start() # start timer on construction
+    timer.start()  # start timer on construction
 
     print("%d Setting up random number generator" % rank)
     rng = NumpyRNG(kernelseed, parallel_safe=True)
@@ -189,7 +188,7 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
     # === Run simulation ===========================================================
 
     # run, measure computer time
-    timer.start() # start timer on construction
+    timer.start()  # start timer on construction
     print("%d Running simulation for %g ms." % (rank, simtime))
     run(simtime)
     simCPUTime = timer.elapsedTime()
@@ -203,7 +202,7 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
             spikes =  pop.get_data('spikes', gather=False)
             for segment in spikes.segments:
                 io.write_segment(segment)
-
+                
     E_rate = E_net.mean_spike_count()*1000.0/simtime
     I_rate = I_net.mean_spike_count()*1000.0/simtime
 
@@ -223,7 +222,7 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
     # === Clean up and quit ========================================================
 
     end()
-
+    
 if __name__ == '__main__':
 
     simulator_name = get_script_args(1)[0]
