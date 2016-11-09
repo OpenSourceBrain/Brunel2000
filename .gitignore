@@ -1,10 +1,17 @@
 *~
 /PyNN/test.py
 PyNN/*.gdf
+PyNN/*.dat
 PyNN/*.*ml
 PyNN/Results/*.*
+NeuroML2/*.mod
+NeuroML2/*.hoc
+NeuroML2/x86_64
 NeuroML2/*.dat
 NeuroML2/results
+NeuroML2/*nrn.py
+NeuroML2/*json
+NeuroML2/*netpyne.py
 NEST/*.gdf
 /NEST/nest_v-4-0.dat
 /NEST/results

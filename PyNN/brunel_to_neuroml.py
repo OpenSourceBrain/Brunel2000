@@ -7,16 +7,23 @@ from brunel08 import runBrunelNetwork
 import shutil
 
 simulator_name = 'neuroml'
-simtime = 500
-order = 10
+simtime = 1000
+order = 5
 
 eta         = 2.0     # rel rate of external input
 g           = 5.0
 
-runBrunelNetwork(g=g, eta=eta, simtime = simtime, order = order, save=True, simulator_name=simulator_name)
+runBrunelNetwork(g=g, 
+                 eta=eta, 
+                 simtime = simtime, 
+                 dt = 0.025, # for jLEMS
+                 order = order, 
+                 save=True, 
+                 simulator_name=simulator_name,
+                 extra={'reference':'BrunelFromPyNN'})
 
-shutil.copy('PyNN_NeuroML2_Export.nml','../NeuroML2/BrunelFromPyNN.net.nml')
-shutil.copy('LEMS_Sim_PyNN_NeuroML2_Export.xml','../NeuroML2/LEMS_BrunelFromPyNN.xml')
+shutil.copy('BrunelFromPyNN.nml','../NeuroML2/BrunelFromPyNN.nml')
+shutil.copy('LEMS_Sim_BrunelFromPyNN.xml','../NeuroML2/LEMS_Sim_BrunelFromPyNN.xml')
 
 
 

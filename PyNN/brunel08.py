@@ -14,7 +14,18 @@ from pyNN.random import NumpyRNG, RandomDistribution
 from neo.io import PyNNTextIO
 
 
-def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsilon = 0.1, order = 2500, N_rec = 50, save=False, simulator_name='nest'):
+def runBrunelNetwork(g=5., 
+                     eta=2., 
+                     dt = 0.1, 
+                     simtime = 1000.0, 
+                     delay = 1.5, 
+                     epsilon = 0.1, 
+                     order = 2500, 
+                     N_rec = 50,
+                     N_rec_v = 2, 
+                     save=False, 
+                     simulator_name='nest',
+                     extra = {}):
 
     exec("from pyNN.%s import *" % simulator_name) in globals()
     
@@ -107,7 +118,6 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
     # For NEST, limits must be set BEFORE connecting any elements
 
     #extra = {'threads' : 2}
-    extra = {}
 
     rank = setup(timestep=dt, max_delay=delay, **extra)
     print("rank =", rank)
@@ -154,11 +164,11 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
     # Record spikes
     print("%d Setting up recording in excitatory population." % rank)
     E_net.sample(Nrec).record('spikes')
-    E_net[0:2].record('v')
+    E_net[0:min(NE,N_rec_v)].record('v')
 
     print("%d Setting up recording in inhibitory population." % rank)
     I_net.sample(Nrec).record('spikes')
-    I_net[0:2].record('v')
+    I_net[0:min(NI,N_rec_v)].record('v')
 
     progress_bar = ProgressBar(width=20)
     connector = FixedProbabilityConnector(epsilon, rng=rng, callback=progress_bar)
@@ -203,6 +213,33 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
             for segment in spikes.segments:
                 io.write_segment(segment)
                 
+            io = PyNNTextIO(filename="brunel-PyNN-%s-%s-%i.dat"%(simulator_name, pop.label, rank))
+            vs =  pop.get_data('v', gather=False)
+            for segment in vs.segments:
+                io.write_segment(segment)
+    
+    spike_data = {}
+    spike_data['senders'] = []
+    spike_data['times'] = []
+    index_offset = 0
+    for pop in [E_net , I_net]:
+        spikes =  pop.get_data('spikes', gather=False)
+        #print(spikes.segments[0].all_data)
+        num_rec = min(pop.size, N_rec)
+        print("Extracting spike info (%i) for %i cells in %s"%(num_rec,pop.size,pop.label))
+        assert(num_rec==len(spikes.segments[0].spiketrains))
+        for i in range(num_rec):
+            ss = spikes.segments[0].spiketrains[i]
+            for s in ss:
+                index = i+index_offset
+                #print("Adding spike at %s in %s[%i] (cell %i)"%(s,pop.label,i,index))
+                spike_data['senders'].append(index)
+                spike_data['times'].append(s)
+        index_offset+=pop.size
+        
+    #from IPython.core.debugger import Tracer
+    #Tracer()()
+
     E_rate = E_net.mean_spike_count()*1000.0/simtime
     I_rate = I_net.mean_spike_count()*1000.0/simtime
 
@@ -223,6 +260,8 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
 
     end()
     
+    return spike_data
+
 if __name__ == '__main__':
 
     simulator_name = get_script_args(1)[0]
@@ -232,4 +271,11 @@ if __name__ == '__main__':
     eta         = 2.0     # rel rate of external input
     g           = 5.0
 
-    runBrunelNetwork(g=g, eta=eta, simtime = simtime, order = order, save=True, simulator_name=simulator_name)
+    runBrunelNetwork(g=g, 
+                     eta=eta, 
+                     simtime = simtime, 
+                     order = order, 
+                     save=True, 
+                     N_rec_v=20, 
+                     simulator_name=simulator_name,
+                     epsilon = 0.1)

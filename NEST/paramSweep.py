@@ -51,11 +51,18 @@ import numpy as np
 import pylab as pl
 
 
-def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, simulator_name=None):
+def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, simulator_name=None, quick=False):
     ## ratio inhibitory weight/excitatory weight
     g_rng = np.arange(3, 9, .5)
     ## external rate relative to threshold rate
     eta_rng = np.arange(.5, 4., .5)
+    
+    if quick:
+        g_rng = np.arange(3, 9, 1)
+        eta_rng = np.arange(.5, 4., 1)
+        #g_rng = np.arange(5, 6, 1)
+        #eta_rng = np.arange(2, 3, 1)
+        
 
     sim_run = 1
 
@@ -70,16 +77,24 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
         count = 0
         for i1, g in enumerate(g_rng):
             for i2, eta in enumerate(eta_rng):
-                print('')
+                print('\n\n###########################################################################################')
                 print('############# (Running with params: g=%s, eta=%s; %s/%s): '% (g, eta, count, len(g_rng)*len(eta_rng)))
                 count+=1
-                all_spikes = runBrunelNetwork(g=g, eta=eta, simtime=simtime, order=order, simulator_name=simulator_name)
+                all_spikes = runBrunelNetwork(g=g, eta=eta, simtime=simtime, order=order, N_rec=NE, simulator_name=simulator_name)
 
                 ta0 = time.time()
-
-                spd_all = nest.GetStatus(all_spikes)[0]['events']
+                if 'pynn' in label:
+                    spd_all = {}
+                    spd_all['senders'] = np.array(all_spikes['senders'])
+                    spd_all['times'] = np.array(all_spikes['times'])
+                    
+                else:
+                    spd_all = nest.GetStatus(all_spikes)[0]['events']
+                    
+                print spd_all
 
                 all_rates[g, eta] = np.histogram(spd_all['senders'], range=(1,N), bins=N)[0]
+                print all_rates[g, eta]
 
                 binw=1. #ms
                 pop_rate = np.histogram(spd_all['times'], range=(0,simtime), bins=simtime/binw)[0] / (binw/1000.)/ N
@@ -96,13 +111,15 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
                 ISIcv[g, eta] = isi_cv
 
                 taf = time.time()
+                
+                print("Results: %s"%results)
                 print("Analysis time   : %.2f s" % (taf-ta0))
 
 
         results['FF'] = FF
         results['ISIcv'] = ISIcv
         results['all_rates'] = all_rates
-
+        
         fl = open('results', 'wb')
         pickle.dump(results, fl)
         fl.close()
@@ -170,6 +187,8 @@ if __name__ == '__main__':
     sys.path.append("../PyNN")
     from brunel08 import runBrunelNetwork as runBrunelNetworkPyNN
     
-    runParameterSweep(runBrunelNetworkDelta, "delta", simtime=simtime, order=order)
-    runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=simtime, order=order)
-    #runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=simtime, order=order, simulator_name='nest')
+    #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=1000, order=50, quick=True)
+    #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=simtime, order=order)
+    #runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=simtime, order=order)
+    #runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=1000, order=250, simulator_name='nest', quick=True)
+    runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=1000, order=1250, simulator_name='nest', quick=False)
