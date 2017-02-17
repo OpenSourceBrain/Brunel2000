@@ -219,7 +219,7 @@ def runBrunelNetwork(g=5.,
             vs =  pop.get_data('v', gather=False)
             for segment in vs.segments:
                 io.write_segment(segment)
-    
+            
     spike_data = {}
     spike_data['senders'] = []
     spike_data['times'] = []
@@ -271,17 +271,18 @@ def runBrunelNetwork(g=5.,
         print('Going to run generated LEMS file: %s on simulator: %s'%(lems_file,jnml_simulator))
         
         if jnml_simulator=='jNeuroML':
-            results, events = pynml.run_lems_with_jneuroml(lems_file, nogui=True, load_saved_data=True)
+            results, events = pynml.run_lems_with_jneuroml(lems_file, nogui=True, load_saved_data=True, reload_events=True)
         
         elif jnml_simulator=='jNeuroML_NEURON':
-            results, events = pynml.run_lems_with_jneuroml_neuron(lems_file, nogui=True, load_saved_data=True)
+            results, events = pynml.run_lems_with_jneuroml_neuron(lems_file, nogui=True, load_saved_data=True, reload_events=True)
             
         spike_data['senders'] = []
         spike_data['times'] = []
         for k in events.keys():
             values = k.split('/') 
             index = int(values[1]) if values[0]=='E_net' else NE+int(values[1])
-            print("Loading spikes for %s (index %i): %s sec"%(k,index,events[k]))
+            n = len(events[k])
+            print("Loading spikes for %s (index %i): [%s, ..., %s (n=%s)] sec"%(k,index,events[k][0] if n>0 else '-',events[k][-1] if n>0 else '-',n))
             for t in events[k]:
                 spike_data['senders'].append(index)
                 spike_data['times'].append(t*1000)
@@ -301,9 +302,9 @@ if __name__ == '__main__':
     jnml_simulator=None
     
     if simulator_name == 'neuroml':
-        jnml_simulator='jNeuroML'
+        jnml_simulator='jNeuroML_NEURON'
         dt=0.025
-        order=25
+        order=10
     
     eta         = 2.0     # rel rate of external input
     g           = 5.0

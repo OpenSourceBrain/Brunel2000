@@ -29,3 +29,9 @@ NEST/*.gdf
 /NEST/NEST_alpha_N1250_1000.0ms.png
 /NeuroML2/ttt.py
 /PyNN/LEMS_Sim_BrunelFromPyNN_nrn.py
+/NEST/LEMS_Sim_PyNN_NeuroML2_Export.xml
+/NEST/LEMS_Sim_PyNN_NeuroML2_Export_nrn.py
+/NEST/PyNN_NeuroML2_Export.nml
+/PyNN/LEMS_Sim_PyNN_NeuroML2_Export_netpyne.py
+/PyNN/LEMS_Sim_PyNN_NeuroML2_Export_netpyne.py_main.json
+/PyNN/LEMS_Sim_PyNN_NeuroML2_Export_nrn.py

@@ -7,7 +7,7 @@ labels = []
 markers = []
 linestyles = []
 
-max_id = 0
+offset_id = 0
 
 files = sys.argv[1:]
 '''
@@ -31,14 +31,15 @@ for file_name in files:
                 [id, t] = line.split()
             elif format == 't_id':
                 [t, id] = line.split()
-            id_shift = max_id+int(float(id))
+            id_shift = offset_id+int(float(id))
             max_id_here = max(max_id_here,id_shift) 
             x.append(t)
             y.append(id_shift)
-    max_id = max_id_here
+    print("max_id_here in %s: %i"%(file_name,max_id_here))
+    labels.append("%s (%i cells)"%(spikes_file.name,max_id_here-offset_id))
+    offset_id = max_id_here+1
     xs.append(x)
     ys.append(y)
-    labels.append(spikes_file.name)
     markers.append('.')
     linestyles.append('')
 
