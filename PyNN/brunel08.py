@@ -25,6 +25,7 @@ def runBrunelNetwork(g=5.,
                      N_rec_v = 2, 
                      save=False, 
                      simulator_name='nest',
+                     jnml_simulator=None,
                      extra = {}):
 
     exec("from pyNN.%s import *" % simulator_name) in globals()
@@ -163,11 +164,11 @@ def runBrunelNetwork(g=5.,
 
     # Record spikes
     print("%d Setting up recording in excitatory population." % rank)
-    E_net.sample(Nrec).record('spikes')
+    E_net.record('spikes')
     E_net[0:min(NE,N_rec_v)].record('v')
 
     print("%d Setting up recording in inhibitory population." % rank)
-    I_net.sample(Nrec).record('spikes')
+    I_net.record('spikes')
     I_net[0:min(NI,N_rec_v)].record('v')
 
     progress_bar = ProgressBar(width=20)
@@ -201,12 +202,13 @@ def runBrunelNetwork(g=5.,
     timer.start()  # start timer on construction
     print("%d Running simulation for %g ms." % (rank, simtime))
     run(simtime)
+    print("Done")
     simCPUTime = timer.elapsedTime()
 
     # write data to file
     #print("%d Writing data to file." % rank)
     #(E_net + I_net).write_data("Results/brunel_np%d_%s.pkl" % (np, simulator_name))
-    if save:
+    if save and not simulator_name=='neuroml':
         for pop in [E_net , I_net]:
             io = PyNNTextIO(filename="brunel-PyNN-%s-%s-%i.gdf"%(simulator_name, pop.label, rank))
             spikes =  pop.get_data('spikes', gather=False)
@@ -221,21 +223,22 @@ def runBrunelNetwork(g=5.,
     spike_data = {}
     spike_data['senders'] = []
     spike_data['times'] = []
-    index_offset = 0
+    index_offset = 1
     for pop in [E_net , I_net]:
-        spikes =  pop.get_data('spikes', gather=False)
-        #print(spikes.segments[0].all_data)
-        num_rec = min(pop.size, N_rec)
-        print("Extracting spike info (%i) for %i cells in %s"%(num_rec,pop.size,pop.label))
-        assert(num_rec==len(spikes.segments[0].spiketrains))
-        for i in range(num_rec):
-            ss = spikes.segments[0].spiketrains[i]
-            for s in ss:
-                index = i+index_offset
-                #print("Adding spike at %s in %s[%i] (cell %i)"%(s,pop.label,i,index))
-                spike_data['senders'].append(index)
-                spike_data['times'].append(s)
-        index_offset+=pop.size
+        if rank == 0:
+            spikes =  pop.get_data('spikes', gather=False)
+            #print(spikes.segments[0].all_data)
+            num_rec = len(spikes.segments[0].spiketrains)
+            print("Extracting spike info (%i) for %i cells in %s"%(num_rec,pop.size,pop.label))
+            #assert(num_rec==len(spikes.segments[0].spiketrains))
+            for i in range(num_rec):
+                ss = spikes.segments[0].spiketrains[i]
+                for s in ss:
+                    index = i+index_offset
+                    #print("Adding spike at %s in %s[%i] (cell %i)"%(s,pop.label,i,index))
+                    spike_data['senders'].append(index)
+                    spike_data['times'].append(s)
+            index_offset+=pop.size
         
     #from IPython.core.debugger import Tracer
     #Tracer()()
@@ -260,22 +263,58 @@ def runBrunelNetwork(g=5.,
 
     end()
     
+    
+    if simulator_name=='neuroml' and jnml_simulator:
+        from pyneuroml import pynml
+        lems_file = 'LEMS_Sim_PyNN_NeuroML2_Export.xml'
+        
+        print('Going to run generated LEMS file: %s on simulator: %s'%(lems_file,jnml_simulator))
+        
+        if jnml_simulator=='jNeuroML':
+            results, events = pynml.run_lems_with_jneuroml(lems_file, nogui=True, load_saved_data=True)
+        
+        elif jnml_simulator=='jNeuroML_NEURON':
+            results, events = pynml.run_lems_with_jneuroml_neuron(lems_file, nogui=True, load_saved_data=True)
+            
+        spike_data['senders'] = []
+        spike_data['times'] = []
+        for k in events.keys():
+            values = k.split('/') 
+            index = int(values[1]) if values[0]=='E_net' else NE+int(values[1])
+            print("Loading spikes for %s (index %i): %s sec"%(k,index,events[k]))
+            for t in events[k]:
+                spike_data['senders'].append(index)
+                spike_data['times'].append(t*1000)
+                
+        
+        
+    
+    #print spike_data
     return spike_data
 
 if __name__ == '__main__':
 
     simulator_name = get_script_args(1)[0]
     simtime = 1000.0
-    order = 1000
-
+    order = 100
+    dt = 0.1
+    jnml_simulator=None
+    
+    if simulator_name == 'neuroml':
+        jnml_simulator='jNeuroML'
+        dt=0.025
+        order=25
+    
     eta         = 2.0     # rel rate of external input
     g           = 5.0
 
     runBrunelNetwork(g=g, 
                      eta=eta, 
                      simtime = simtime, 
+                     dt = dt,
                      order = order, 
                      save=True, 
                      N_rec_v=20, 
                      simulator_name=simulator_name,
+                     jnml_simulator=jnml_simulator,
                      epsilon = 0.1)

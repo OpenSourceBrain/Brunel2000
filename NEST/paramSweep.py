@@ -51,7 +51,7 @@ import numpy as np
 import pylab as pl
 
 
-def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, simulator_name=None, quick=False):
+def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, simulator_name=None, jnml_simulator=None, quick=False):
     ## ratio inhibitory weight/excitatory weight
     g_rng = np.arange(3, 9, .5)
     ## external rate relative to threshold rate
@@ -63,6 +63,8 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
         #g_rng = np.arange(5, 6, 1)
         #eta_rng = np.arange(2, 3, 1)
         
+    if not simulator_name:
+        simulator_name = 'NEST'
 
     sim_run = 1
 
@@ -74,13 +76,23 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
         ISIcv = {}
         FF = {}
         all_rates = {}
-        count = 0
+        count = 1
         for i1, g in enumerate(g_rng):
             for i2, eta in enumerate(eta_rng):
                 print('\n\n###########################################################################################')
                 print('############# (Running with params: g=%s, eta=%s; %s/%s): '% (g, eta, count, len(g_rng)*len(eta_rng)))
                 count+=1
-                all_spikes = runBrunelNetwork(g=g, eta=eta, simtime=simtime, order=order, N_rec=NE, simulator_name=simulator_name)
+                dt = 0.1
+                if jnml_simulator:
+                    dt=0.025
+                all_spikes = runBrunelNetwork(g=g, 
+                                              eta=eta, 
+                                              simtime=simtime, 
+                                              dt = dt,
+                                              order=order, 
+                                              N_rec=NE, 
+                                              simulator_name=simulator_name,
+                                              jnml_simulator=jnml_simulator)
 
                 ta0 = time.time()
                 if 'pynn' in label:
@@ -91,13 +103,15 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
                 else:
                     spd_all = nest.GetStatus(all_spikes)[0]['events']
                     
-                print spd_all
+                
+                print("All spike data: %s"%spd_all)
 
-                all_rates[g, eta] = np.histogram(spd_all['senders'], range=(1,N), bins=N)[0]
-                print all_rates[g, eta]
+                all_rates[g, eta] = np.histogram(spd_all['senders'], range=(1,N), bins=N)[0] / (simtime/1e3)
+                print("All rates: %s"%all_rates[g, eta])
 
                 binw=1. #ms
                 pop_rate = np.histogram(spd_all['times'], range=(0,simtime), bins=simtime/binw)[0] / (binw/1000.)/ N
+                #print("pop_rate: %s"%pop_rate)
 
                 FF[g, eta] = np.var(pop_rate) / np.mean(pop_rate)
 
@@ -107,12 +121,12 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
                     spids = np.where(spd_all['senders'] == nid)
                     isi = np.diff(spd_all['times'][spids])
                     isi_cv[ii] = np.std(isi)/ np.mean(isi)
+                    #print("Cell %i has isi: %s; cv: %s"%(nid,isi,isi_cv[ii]))
 
                 ISIcv[g, eta] = isi_cv
 
                 taf = time.time()
                 
-                print("Results: %s"%results)
                 print("Analysis time   : %.2f s" % (taf-ta0))
 
 
@@ -144,11 +158,13 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
 
     for i1, g in enumerate(g_rng):
             for i2, eta in enumerate(eta_rng):
+                #print("- %s"%(ISIcv[g,eta]))
                 I[i1,i2] = np.mean(ISIcv[g,eta])
                 S[i1,i2] = FF[g,eta]
 
                 Rexc[i1,i2] = np.mean(all_rates[g,eta][0:NE])
                 Rinh[i1,i2] = np.mean(all_rates[g,eta][NE:])
+                print("g=%s, eta=%s: Rexc=%s, Rinh=%s, S=%s, I=%s"%(g,eta,Rexc[i1,i2],Rinh[i1,i2],S[i1,i2],I[i1,i2]))
 
     def _plot_(X, sbplt=111, ttl=[]):
         ax = pl.subplot(sbplt)
@@ -160,7 +176,11 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
         ax.set_yticks(range(0,len(eta_rng))); ax.set_yticklabels(eta_rng)
         pl.colorbar()
 
-    pl.figure(figsize=(16,8))
+    fig = pl.figure(figsize=(16,8))
+    info = "%s (%s) %i exc, %i inh cells, %s ms"%(simulator_name.upper(),label,NE, N-NE, simtime)
+    
+    fig.canvas.set_window_title(info)
+    pl.suptitle(info)
 
     _plot_(Rexc.T, 221, 'Rates Exc (Hz)')
     _plot_(Rinh.T, 222, 'Rates Inh (Hz)')
@@ -170,15 +190,17 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
 
     pl.subplots_adjust(wspace=.3, hspace=.3)
 
-    pl.savefig('NEST_%s_N%s_%sms.png'%(label,N,simtime), bbox_inches='tight')
 
+    pl.savefig('%s_%s_N%s_%sms.png'%(simulator_name.upper(), label,N,simtime), bbox_inches='tight')
+    print("Finished: "+info)
     pl.show()
+    
     
     
 if __name__ == '__main__':
     
     simtime = 1000.0
-    order = 2500
+    order = 500
     
 
     from brunel_delta_nest import runBrunelNetwork as runBrunelNetworkDelta
@@ -187,8 +209,11 @@ if __name__ == '__main__':
     sys.path.append("../PyNN")
     from brunel08 import runBrunelNetwork as runBrunelNetworkPyNN
     
-    #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=1000, order=50, quick=True)
+    #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=1000, order=100, quick=True)
     #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=simtime, order=order)
-    #runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=simtime, order=order)
-    #runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=1000, order=250, simulator_name='nest', quick=True)
-    runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=1000, order=1250, simulator_name='nest', quick=False)
+    #runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=1000, order=100, quick=True)
+    #runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=100, order=10, simulator_name='nest', quick=True)
+    runParameterSweep(runBrunelNetworkPyNN, "pynn_neuron", simtime=1000, order=100, simulator_name='neuron', quick=True)
+    #runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=1000, order=100, simulator_name='nest', quick=True)
+    #runParameterSweep(runBrunelNetworkPyNN, "pynn_neuroml", simtime=1000, order=10, simulator_name='neuroml', jnml_simulator='jNeuroML', quick=True)
+    #runParameterSweep(runBrunelNetworkPyNN, "pynn_neuroml", simtime=1000, order=10, simulator_name='neuroml', jnml_simulator='jNeuroML_NEURON', quick=True)
