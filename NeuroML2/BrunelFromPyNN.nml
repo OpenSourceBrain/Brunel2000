@@ -1,14 +1,20 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta5.xsd" id="BrunelFromPyNN">
-    <IF_curr_alpha id="IF_curr_alpha_E_net" cm="0.001" i_offset="0." tau_syn_E="0.1" tau_syn_I="0.1" v_init="-65." tau_m="20." tau_refrac="2." v_reset="0." v_rest="0." v_thresh="20."/>
-    <IF_curr_alpha id="IF_curr_alpha_I_net" cm="0.001" i_offset="0." tau_syn_E="0.1" tau_syn_I="0.1" v_init="-65." tau_m="20." tau_refrac="2." v_reset="0." v_rest="0." v_thresh="20."/>
+    <notes>
+    This NeuroML 2 file has been generated from: 
+        PyNN v0.8.2
+        libNeuroML v0.2.26
+        pyNeuroML v0.2.6
+    </notes>
+    <IF_curr_alpha id="IF_curr_alpha_E_net" cm="0.001" i_offset="0." tau_syn_E="0.1" tau_syn_I="0.1" v_init="0." tau_m="20." tau_refrac="2." v_reset="0." v_rest="0." v_thresh="20."/>
+    <IF_curr_alpha id="IF_curr_alpha_I_net" cm="0.001" i_offset="0." tau_syn_E="0.1" tau_syn_I="0.1" v_init="0." tau_m="20." tau_refrac="2." v_reset="0." v_rest="0." v_thresh="20."/>
     <alphaCurrSynapse id="syn__E_net__TO__E_net" tau_syn="0.1"/>
     <alphaCurrSynapse id="syn__I_net__TO__E_net" tau_syn="0.1"/>
     <alphaCurrSynapse id="syn__expoisson__TO__E_net" tau_syn="0.1"/>
     <alphaCurrSynapse id="syn__E_net__TO__I_net" tau_syn="0.1"/>
     <alphaCurrSynapse id="syn__I_net__TO__I_net" tau_syn="0.1"/>
     <alphaCurrSynapse id="syn__inpoisson__TO__I_net" tau_syn="0.1"/>
-    <SpikeSourcePoisson id="SpikeSourcePoisson_expoisson" start="0.0ms" duration="10000000000.0ms" rate="20000.0Hz"/>
-    <SpikeSourcePoisson id="SpikeSourcePoisson_inpoisson" start="0.0ms" duration="10000000000.0ms" rate="20000.0Hz"/>
+    <SpikeSourcePoisson id="SpikeSourcePoisson_expoisson" start="0.0ms" duration="10000000000.0ms" rate="10000.0Hz"/>
+    <SpikeSourcePoisson id="SpikeSourcePoisson_inpoisson" start="0.0ms" duration="10000000000.0ms" rate="10000.0Hz"/>
     <network id="network">
         <population id="E_net" component="IF_curr_alpha_E_net" size="20" type="populationList">
             <instance id="0">
@@ -232,19 +238,19 @@
             <connectionWD id="60" preCellId="../E_net/18/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/19/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
         </projection>
         <projection id="I_net__TO__E_net" presynapticPopulation="I_net" postsynapticPopulation="E_net" synapse="syn__I_net__TO__E_net">
-            <connectionWD id="0" preCellId="../I_net/1/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/2/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="1" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/2/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="2" preCellId="../I_net/1/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/9/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="3" preCellId="../I_net/1/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/10/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="4" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/10/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="5" preCellId="../I_net/3/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/12/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="6" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/12/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="7" preCellId="../I_net/1/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/15/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="8" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/15/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="9" preCellId="../I_net/3/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/16/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="10" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/17/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="11" preCellId="../I_net/2/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/19/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="12" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/19/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
+            <connectionWD id="0" preCellId="../I_net/1/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/2/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="1" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/2/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="2" preCellId="../I_net/1/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/9/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="3" preCellId="../I_net/1/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/10/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="4" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/10/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="5" preCellId="../I_net/3/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/12/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="6" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/12/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="7" preCellId="../I_net/1/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/15/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="8" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/15/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="9" preCellId="../I_net/3/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/16/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="10" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/17/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="11" preCellId="../I_net/2/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/19/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="12" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/19/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
         </projection>
         <projection id="expoisson__TO__E_net" presynapticPopulation="expoisson" postsynapticPopulation="E_net" synapse="syn__expoisson__TO__E_net">
             <connectionWD id="0" preCellId="../expoisson/0/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/0/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
@@ -284,8 +290,8 @@
             <connectionWD id="12" preCellId="../E_net/13/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/4/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
         </projection>
         <projection id="I_net__TO__I_net" presynapticPopulation="I_net" postsynapticPopulation="I_net" synapse="syn__I_net__TO__I_net">
-            <connectionWD id="0" preCellId="../I_net/2/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/1/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
-            <connectionWD id="1" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/1/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.002068175331632" delay="1.5ms"/>
+            <connectionWD id="0" preCellId="../I_net/2/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/1/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="1" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/1/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
         </projection>
         <projection id="inpoisson__TO__I_net" presynapticPopulation="inpoisson" postsynapticPopulation="I_net" synapse="syn__inpoisson__TO__I_net">
             <connectionWD id="0" preCellId="../inpoisson/0/SpikeSourcePoisson_inpoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/0/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>

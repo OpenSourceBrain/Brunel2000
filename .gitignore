@@ -35,3 +35,5 @@ NEST/*.gdf
 /PyNN/LEMS_Sim_PyNN_NeuroML2_Export_netpyne.py
 /PyNN/LEMS_Sim_PyNN_NeuroML2_Export_netpyne.py_main.json
 /PyNN/LEMS_Sim_PyNN_NeuroML2_Export_nrn.py
+/PyNN/*_netpyne.py
+/PyNN/*.py_main.json

@@ -145,6 +145,7 @@ def runBrunelNetwork(g=5.,
 
     print("%d Creating excitatory population with %d neurons." % (rank, NE))
     celltype = IF_curr_alpha(**cell_params)
+    celltype.default_initial_values['v'] = U0 # Setting default init v, useful for NML2 export
     E_net = Population(NE, celltype, label="E_net")
 
     print("%d Creating inhibitory population with %d neurons." % (rank, NI))
@@ -200,7 +201,7 @@ def runBrunelNetwork(g=5.,
 
     # run, measure computer time
     timer.start()  # start timer on construction
-    print("%d Running simulation for %g ms." % (rank, simtime))
+    print("%d Running simulation for %g ms (dt=%sms)." % (rank, simtime, dt))
     run(simtime)
     print("Done")
     simCPUTime = timer.elapsedTime()
@@ -306,8 +307,8 @@ if __name__ == '__main__':
         dt=0.025
         order=10
     
-    eta         = 2.0     # rel rate of external input
-    g           = 5.0
+    eta         = 1.0     # rel rate of external input
+    g           = 4.0
 
     runBrunelNetwork(g=g, 
                      eta=eta, 

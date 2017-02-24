@@ -10,8 +10,11 @@ simulator_name = 'neuroml'
 simtime = 1000
 order = 5
 
-eta         = 2.0     # rel rate of external input
-g           = 5.0
+eta         = 1     # rel rate of external input
+g           = 4
+
+import logging
+logging.basicConfig(level=logging.DEBUG, format="%(name)-19s %(levelname)-5s - %(message)s")
 
 runBrunelNetwork(g=g, 
                  eta=eta, 
