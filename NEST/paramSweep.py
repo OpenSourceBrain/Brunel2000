@@ -211,9 +211,9 @@ if __name__ == '__main__':
     
     #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=1000, order=100, quick=True)
     #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=simtime, order=order)
-    #runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=1000, order=100, quick=True)
+    runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=1000, order=50, quick=True)
     #runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=100, order=10, simulator_name='nest', quick=True)
-    runParameterSweep(runBrunelNetworkPyNN, "pynn_brian", simtime=1000, order=50, simulator_name='brian', quick=True)
+    #runParameterSweep(runBrunelNetworkPyNN, "pynn_brian", simtime=1000, order=50, simulator_name='brian', quick=True)
     
     # Exponentially increasing sim time issue!! 
     #runParameterSweep(runBrunelNetworkPyNN, "pynn_neuron", simtime=1000, order=50, simulator_name='neuron', quick=True)
