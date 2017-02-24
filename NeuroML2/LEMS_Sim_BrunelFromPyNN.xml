@@ -3,8 +3,8 @@
     <!-- 
     This LEMS file has been generated from: 
         PyNN v0.8.2
-        libNeuroML v0.2.26
-        pyNeuroML v0.2.6
+        libNeuroML v0.2.27
+        pyNeuroML v0.2.7
      -->
     
     <!-- Specify which component to run -->
@@ -16,18 +16,18 @@
     <Include file="Simulation.xml"/>
     
     <Include file="PyNN.xml"/>
-    <Include file="BrunelFromPyNN.nml"/>
+    <Include file="BrunelFromPyNN.net.nml"/>
    
     <Simulation id="Sim_BrunelFromPyNN" length="1000.0ms" step="0.025ms" target="network" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
         
         <Display id="E_net_v" title="E_net v" timeScale="1ms" xmin="-100.0" xmax="1100.0" ymin="-70" ymax="10">
-            <Line id="E_net v: cell 42" quantity="E_net/0/IF_curr_alpha_E_net/v" scale="1mV" color="#5a3cdc" timeScale="1ms"/>
-            <Line id="E_net v: cell 43" quantity="E_net/1/IF_curr_alpha_E_net/v" scale="1mV" color="#2b5f80" timeScale="1ms"/>
+            <Line id="E_net v: cell 42" quantity="E_net/0/IF_curr_alpha_E_net/v" scale="1mV" color="#2e33ff" timeScale="1ms"/>
+            <Line id="E_net v: cell 43" quantity="E_net/1/IF_curr_alpha_E_net/v" scale="1mV" color="#7532f5" timeScale="1ms"/>
         </Display>
         
         <Display id="I_net_v" title="I_net v" timeScale="1ms" xmin="-100.0" xmax="1100.0" ymin="-70" ymax="10">
-            <Line id="I_net v: cell 62" quantity="I_net/0/IF_curr_alpha_I_net/v" scale="1mV" color="#0be575" timeScale="1ms"/>
-            <Line id="I_net v: cell 63" quantity="I_net/1/IF_curr_alpha_I_net/v" scale="1mV" color="#d95a4b" timeScale="1ms"/>
+            <Line id="I_net v: cell 62" quantity="I_net/0/IF_curr_alpha_I_net/v" scale="1mV" color="#725f77" timeScale="1ms"/>
+            <Line id="I_net v: cell 63" quantity="I_net/1/IF_curr_alpha_I_net/v" scale="1mV" color="#8f805c" timeScale="1ms"/>
         </Display>
         
         <OutputFile id="OF_E_net_v" fileName="E_net_v.dat">

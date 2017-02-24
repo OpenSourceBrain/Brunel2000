@@ -288,9 +288,6 @@ def runBrunelNetwork(g=5.,
                 spike_data['senders'].append(index)
                 spike_data['times'].append(t*1000)
                 
-        
-        
-    
     #print spike_data
     return spike_data
 
