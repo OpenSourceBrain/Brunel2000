@@ -2,14 +2,18 @@
 
 #### 12500 cell network
 
+**NEST (delta synapses)**
+
+![](NEST_delta_N12500_1000.0ms.png)
+
+
 **NEST (alpha synapses)**
 
 ![](NEST_alpha_N12500_1000.0ms.png)
 
+**PyNN -> NEST**
 
-**NEST (delta synapses)**
-
-![](NEST_delta_N12500_1000.0ms.png)
+![](NEST_pynn_nest_N12500_1000ms.png)
 
 #### 250 cell network
 
