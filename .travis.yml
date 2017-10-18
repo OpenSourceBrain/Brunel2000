@@ -1,11 +1,12 @@
 # Framework for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
 
-dist: trusty
+dist: precise
 sudo: false
 
 addons:
   apt:
     packages:
+    - python-pip # use latest 
        # Requirements for Brian & NEST
     - python-numpy 
     - python-scipy 
