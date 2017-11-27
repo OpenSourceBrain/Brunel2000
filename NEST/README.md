@@ -1,5 +1,7 @@
 ### Comparing Brunel model across implementations
 
+_Note: work in progress!_
+
 #### 12500 cell network
 
 **NEST (delta synapses)**
