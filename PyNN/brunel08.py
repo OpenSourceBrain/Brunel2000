@@ -166,11 +166,13 @@ def runBrunelNetwork(g=5.,
     # Record spikes
     print("%d Setting up recording in excitatory population." % rank)
     E_net.record('spikes')
-    E_net[0:min(NE,N_rec_v)].record('v')
+    if N_rec_v>0:
+        E_net[0:min(NE,N_rec_v)].record('v')
 
     print("%d Setting up recording in inhibitory population." % rank)
     I_net.record('spikes')
-    I_net[0:min(NI,N_rec_v)].record('v')
+    if N_rec_v>0:
+        I_net[0:min(NI,N_rec_v)].record('v')
 
     progress_bar = ProgressBar(width=20)
     connector = FixedProbabilityConnector(epsilon, rng=rng, callback=progress_bar)
