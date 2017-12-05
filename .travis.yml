@@ -17,6 +17,7 @@ addons:
     - libncurses5-dev 
     - libgsl0-dev
     - cython
+    - cmake
 
 language: python
 
