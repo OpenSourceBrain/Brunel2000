@@ -1,6 +1,6 @@
 # Framework for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
 
-dist: precise
+dist: trusty
 sudo: false
 
 addons:
@@ -17,7 +17,6 @@ addons:
     - libncurses5-dev 
     - libgsl0-dev
     - cython
-    - cmake
 
 language: python
 
@@ -38,7 +37,7 @@ env:
 
 install: 
     - pip install git+https://github.com/OpenSourceBrain/osb-model-validation
-    - pip install scipy==0.9.0 # Why is this needed? Doesn't seem to get installed correctly on trusty with addons above...
+    - pip install scipy # Why is this needed? Doesn't seem to get installed correctly on trusty with addons above...
 
 script:
     - pwd
