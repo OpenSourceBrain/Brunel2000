@@ -110,7 +110,7 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
                 print("All rates: %s"%all_rates[g, eta])
 
                 binw=1. #ms
-                pop_rate = np.histogram(spd_all['times'], range=(0,simtime), bins=simtime/binw)[0] / (binw/1000.)/ N
+                pop_rate = np.histogram(spd_all['times'], range=(0,simtime), bins=int(simtime/binw) )[0] / (binw/1000.)/ N
                 #print("pop_rate: %s"%pop_rate)
 
                 FF[g, eta] = np.var(pop_rate) / np.mean(pop_rate)
@@ -209,7 +209,7 @@ if __name__ == '__main__':
     sys.path.append("../PyNN")
     from brunel08 import runBrunelNetwork as runBrunelNetworkPyNN
     
-    #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=1000, order=100, quick=True)
+    #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=1000, order=500, quick=False)
     #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=simtime, order=order)
     runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=1000, order=50, quick=True)
     #runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=100, order=10, simulator_name='nest', quick=True)

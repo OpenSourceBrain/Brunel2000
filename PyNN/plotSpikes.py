@@ -1,3 +1,6 @@
+print "Use pynml-plotspikes instead!"
+
+'''
 import sys
 from pyneuroml import pynml
 
@@ -10,12 +13,7 @@ linestyles = []
 offset_id = 0
 
 files = sys.argv[1:]
-'''
-format = 'id_t'
 
-if '-t_id' in files:
-    format = 't_id'
-    files.remove('-t_id')'''
     
 format = 't_id'
 
@@ -55,4 +53,6 @@ pynml.generate_plot(xs,
                     yaxis = "Cell number", 
                     grid = False,
                     show_plot_already=True)
+                    
+'''
     
