@@ -102,6 +102,11 @@ def runBrunelNetwork(g=5.,
 
     # number of synapses---just so we know
     Nsyn = (C+1)*N + 2*Nrec  # number of neurons * (internal synapses + 1 synapse from PoissonGenerator) + 2synapses" to spike detectors
+    
+    print('Created Brunel network with parameters')
+    for p in ['NE','NI','downscale','order','N_rec','epsilon','eta','g','J','delay','tauMem','tauSyn','tauRef','U0','theta','simtime','dt', \
+              'order_eff','J_eff','N','CE','CI','C','Cext','fudge','JE','JI','nu_thresh','nu_ext','p_rate','Nsyn']:
+        print('  %s%s= %s'%(p, ' '*(12-len(p)), eval(p)))
 
     # put cell parameters into a dict
     cell_params = {'tau_m'      : tauMem,

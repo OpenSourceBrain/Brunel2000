@@ -1,9 +1,9 @@
 <neuroml xmlns="http://www.neuroml.org/schema/neuroml2"  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta5.xsd" id="BrunelFromPyNN">
     <notes>
     This NeuroML 2 file has been generated from: 
-        PyNN v0.9.1
-        libNeuroML v0.2.34
-        pyNeuroML v0.3.5
+        PyNN v0.9.2
+        libNeuroML v0.2.45
+        pyNeuroML v0.3.14
     </notes>
     <IF_curr_alpha id="IF_curr_alpha_E_net" cm="0.001" i_offset="0." tau_syn_E="0.1" tau_syn_I="0.1" v_init="0." tau_m="20." tau_refrac="2." v_reset="0." v_rest="0." v_thresh="20."/>
     <IF_curr_alpha id="IF_curr_alpha_I_net" cm="0.001" i_offset="0." tau_syn_E="0.1" tau_syn_I="0.1" v_init="0." tau_m="20." tau_refrac="2." v_reset="0." v_rest="0." v_thresh="20."/>
@@ -15,7 +15,7 @@
     <alphaCurrSynapse id="syn__inpoisson__TO__I_net" tau_syn="0.1"/>
     <SpikeSourcePoisson id="SpikeSourcePoisson_expoisson" start="0.0ms" duration="10000000000.0ms" rate="10000.0Hz"/>
     <SpikeSourcePoisson id="SpikeSourcePoisson_inpoisson" start="0.0ms" duration="10000000000.0ms" rate="10000.0Hz"/>
-    <network id="network">
+    <network id="BrunelFromPyNN">
         <population id="E_net" component="IF_curr_alpha_E_net" size="20" type="populationList">
             <instance id="0">
                 <location x="0." y="0." z="0."/>
@@ -175,130 +175,136 @@
             </instance>
         </population>
         <projection id="E_net__TO__E_net" presynapticPopulation="E_net" postsynapticPopulation="E_net" synapse="syn__E_net__TO__E_net">
-            <connectionWD id="0" preCellId="../E_net/5/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/0/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="1" preCellId="../E_net/6/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/0/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="2" preCellId="../E_net/15/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/0/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="3" preCellId="../E_net/3/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/1/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="4" preCellId="../E_net/8/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/1/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="5" preCellId="../E_net/10/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/1/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="6" preCellId="../E_net/13/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/2/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="7" preCellId="../E_net/9/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/3/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="8" preCellId="../E_net/10/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/3/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="9" preCellId="../E_net/13/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/3/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="10" preCellId="../E_net/15/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/3/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="11" preCellId="../E_net/16/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/3/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="12" preCellId="../E_net/2/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/4/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="13" preCellId="../E_net/18/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/4/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="14" preCellId="../E_net/19/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/4/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="15" preCellId="../E_net/4/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/5/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="16" preCellId="../E_net/17/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/5/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="17" preCellId="../E_net/1/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/6/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="18" preCellId="../E_net/11/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/6/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="19" preCellId="../E_net/12/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/6/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="20" preCellId="../E_net/19/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/6/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="21" preCellId="../E_net/2/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/7/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="22" preCellId="../E_net/8/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/7/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="23" preCellId="../E_net/10/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/7/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="24" preCellId="../E_net/19/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/7/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="25" preCellId="../E_net/2/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/8/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="26" preCellId="../E_net/1/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/9/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="27" preCellId="../E_net/4/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/9/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="28" preCellId="../E_net/7/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/9/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="29" preCellId="../E_net/8/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/9/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="30" preCellId="../E_net/11/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/9/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="31" preCellId="../E_net/15/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/9/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="32" preCellId="../E_net/19/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/9/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="33" preCellId="../E_net/2/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/10/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="34" preCellId="../E_net/4/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/10/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="35" preCellId="../E_net/10/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/10/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="36" preCellId="../E_net/10/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/11/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="37" preCellId="../E_net/19/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/11/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="38" preCellId="../E_net/18/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/12/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="39" preCellId="../E_net/6/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/13/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="40" preCellId="../E_net/9/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/13/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="41" preCellId="../E_net/14/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/13/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="42" preCellId="../E_net/4/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/14/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="43" preCellId="../E_net/9/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/14/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="44" preCellId="../E_net/18/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/14/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="45" preCellId="../E_net/1/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/15/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="46" preCellId="../E_net/3/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/15/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="47" preCellId="../E_net/4/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/15/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="48" preCellId="../E_net/8/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/15/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="49" preCellId="../E_net/8/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/16/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="50" preCellId="../E_net/2/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/17/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="51" preCellId="../E_net/4/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/17/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="52" preCellId="../E_net/12/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/17/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="53" preCellId="../E_net/16/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/17/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="54" preCellId="../E_net/1/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/18/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="55" preCellId="../E_net/8/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/18/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="56" preCellId="../E_net/13/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/18/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="57" preCellId="../E_net/19/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/18/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="58" preCellId="../E_net/0/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/19/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="59" preCellId="../E_net/11/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/19/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="60" preCellId="../E_net/18/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/19/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="0" preCellId="../E_net/5/IF_curr_alpha_E_net" postCellId="../E_net/0/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="1" preCellId="../E_net/6/IF_curr_alpha_E_net" postCellId="../E_net/0/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="2" preCellId="../E_net/15/IF_curr_alpha_E_net" postCellId="../E_net/0/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="3" preCellId="../E_net/3/IF_curr_alpha_E_net" postCellId="../E_net/1/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="4" preCellId="../E_net/8/IF_curr_alpha_E_net" postCellId="../E_net/1/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="5" preCellId="../E_net/10/IF_curr_alpha_E_net" postCellId="../E_net/1/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="6" preCellId="../E_net/13/IF_curr_alpha_E_net" postCellId="../E_net/2/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="7" preCellId="../E_net/9/IF_curr_alpha_E_net" postCellId="../E_net/3/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="8" preCellId="../E_net/10/IF_curr_alpha_E_net" postCellId="../E_net/3/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="9" preCellId="../E_net/13/IF_curr_alpha_E_net" postCellId="../E_net/3/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="10" preCellId="../E_net/15/IF_curr_alpha_E_net" postCellId="../E_net/3/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="11" preCellId="../E_net/16/IF_curr_alpha_E_net" postCellId="../E_net/3/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="12" preCellId="../E_net/2/IF_curr_alpha_E_net" postCellId="../E_net/4/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="13" preCellId="../E_net/18/IF_curr_alpha_E_net" postCellId="../E_net/4/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="14" preCellId="../E_net/19/IF_curr_alpha_E_net" postCellId="../E_net/4/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="15" preCellId="../E_net/4/IF_curr_alpha_E_net" postCellId="../E_net/5/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="16" preCellId="../E_net/17/IF_curr_alpha_E_net" postCellId="../E_net/5/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="17" preCellId="../E_net/1/IF_curr_alpha_E_net" postCellId="../E_net/6/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="18" preCellId="../E_net/11/IF_curr_alpha_E_net" postCellId="../E_net/6/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="19" preCellId="../E_net/12/IF_curr_alpha_E_net" postCellId="../E_net/6/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="20" preCellId="../E_net/19/IF_curr_alpha_E_net" postCellId="../E_net/6/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="21" preCellId="../E_net/2/IF_curr_alpha_E_net" postCellId="../E_net/7/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="22" preCellId="../E_net/8/IF_curr_alpha_E_net" postCellId="../E_net/7/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="23" preCellId="../E_net/10/IF_curr_alpha_E_net" postCellId="../E_net/7/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="24" preCellId="../E_net/19/IF_curr_alpha_E_net" postCellId="../E_net/7/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="25" preCellId="../E_net/2/IF_curr_alpha_E_net" postCellId="../E_net/8/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="26" preCellId="../E_net/1/IF_curr_alpha_E_net" postCellId="../E_net/9/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="27" preCellId="../E_net/4/IF_curr_alpha_E_net" postCellId="../E_net/9/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="28" preCellId="../E_net/7/IF_curr_alpha_E_net" postCellId="../E_net/9/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="29" preCellId="../E_net/8/IF_curr_alpha_E_net" postCellId="../E_net/9/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="30" preCellId="../E_net/11/IF_curr_alpha_E_net" postCellId="../E_net/9/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="31" preCellId="../E_net/15/IF_curr_alpha_E_net" postCellId="../E_net/9/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="32" preCellId="../E_net/19/IF_curr_alpha_E_net" postCellId="../E_net/9/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="33" preCellId="../E_net/2/IF_curr_alpha_E_net" postCellId="../E_net/10/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="34" preCellId="../E_net/4/IF_curr_alpha_E_net" postCellId="../E_net/10/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="35" preCellId="../E_net/10/IF_curr_alpha_E_net" postCellId="../E_net/10/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="36" preCellId="../E_net/10/IF_curr_alpha_E_net" postCellId="../E_net/11/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="37" preCellId="../E_net/19/IF_curr_alpha_E_net" postCellId="../E_net/11/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="38" preCellId="../E_net/18/IF_curr_alpha_E_net" postCellId="../E_net/12/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="39" preCellId="../E_net/6/IF_curr_alpha_E_net" postCellId="../E_net/13/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="40" preCellId="../E_net/9/IF_curr_alpha_E_net" postCellId="../E_net/13/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="41" preCellId="../E_net/14/IF_curr_alpha_E_net" postCellId="../E_net/13/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="42" preCellId="../E_net/4/IF_curr_alpha_E_net" postCellId="../E_net/14/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="43" preCellId="../E_net/9/IF_curr_alpha_E_net" postCellId="../E_net/14/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="44" preCellId="../E_net/18/IF_curr_alpha_E_net" postCellId="../E_net/14/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="45" preCellId="../E_net/1/IF_curr_alpha_E_net" postCellId="../E_net/15/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="46" preCellId="../E_net/3/IF_curr_alpha_E_net" postCellId="../E_net/15/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="47" preCellId="../E_net/4/IF_curr_alpha_E_net" postCellId="../E_net/15/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="48" preCellId="../E_net/8/IF_curr_alpha_E_net" postCellId="../E_net/15/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="49" preCellId="../E_net/8/IF_curr_alpha_E_net" postCellId="../E_net/16/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="50" preCellId="../E_net/2/IF_curr_alpha_E_net" postCellId="../E_net/17/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="51" preCellId="../E_net/4/IF_curr_alpha_E_net" postCellId="../E_net/17/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="52" preCellId="../E_net/12/IF_curr_alpha_E_net" postCellId="../E_net/17/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="53" preCellId="../E_net/16/IF_curr_alpha_E_net" postCellId="../E_net/17/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="54" preCellId="../E_net/1/IF_curr_alpha_E_net" postCellId="../E_net/18/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="55" preCellId="../E_net/8/IF_curr_alpha_E_net" postCellId="../E_net/18/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="56" preCellId="../E_net/13/IF_curr_alpha_E_net" postCellId="../E_net/18/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="57" preCellId="../E_net/19/IF_curr_alpha_E_net" postCellId="../E_net/18/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="58" preCellId="../E_net/0/IF_curr_alpha_E_net" postCellId="../E_net/19/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="59" preCellId="../E_net/11/IF_curr_alpha_E_net" postCellId="../E_net/19/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="60" preCellId="../E_net/18/IF_curr_alpha_E_net" postCellId="../E_net/19/IF_curr_alpha_E_net" weight="0.000413635066326" delay="1.5ms"/>
         </projection>
         <projection id="I_net__TO__E_net" presynapticPopulation="I_net" postsynapticPopulation="E_net" synapse="syn__I_net__TO__E_net">
-            <connectionWD id="0" preCellId="../I_net/1/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/2/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="1" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/2/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="2" preCellId="../I_net/1/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/9/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="3" preCellId="../I_net/1/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/10/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="4" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/10/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="5" preCellId="../I_net/3/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/12/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="6" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/12/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="7" preCellId="../I_net/1/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/15/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="8" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/15/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="9" preCellId="../I_net/3/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/16/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="10" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/17/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="11" preCellId="../I_net/2/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/19/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="12" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/19/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="0" preCellId="../I_net/0/IF_curr_alpha_I_net" postCellId="../E_net/1/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="1" preCellId="../I_net/1/IF_curr_alpha_I_net" postCellId="../E_net/1/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="2" preCellId="../I_net/0/IF_curr_alpha_I_net" postCellId="../E_net/3/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="3" preCellId="../I_net/3/IF_curr_alpha_I_net" postCellId="../E_net/4/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="4" preCellId="../I_net/3/IF_curr_alpha_I_net" postCellId="../E_net/5/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="5" preCellId="../I_net/0/IF_curr_alpha_I_net" postCellId="../E_net/6/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="6" preCellId="../I_net/3/IF_curr_alpha_I_net" postCellId="../E_net/10/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="7" preCellId="../I_net/4/IF_curr_alpha_I_net" postCellId="../E_net/13/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="8" preCellId="../I_net/0/IF_curr_alpha_I_net" postCellId="../E_net/14/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="9" preCellId="../I_net/3/IF_curr_alpha_I_net" postCellId="../E_net/14/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="10" preCellId="../I_net/0/IF_curr_alpha_I_net" postCellId="../E_net/15/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="11" preCellId="../I_net/1/IF_curr_alpha_I_net" postCellId="../E_net/15/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="12" preCellId="../I_net/2/IF_curr_alpha_I_net" postCellId="../E_net/16/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="13" preCellId="../I_net/3/IF_curr_alpha_I_net" postCellId="../E_net/19/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="14" preCellId="../I_net/4/IF_curr_alpha_I_net" postCellId="../E_net/19/IF_curr_alpha_E_net" weight="-0.001654540265306" delay="1.5ms"/>
         </projection>
         <projection id="expoisson__TO__E_net" presynapticPopulation="expoisson" postsynapticPopulation="E_net" synapse="syn__expoisson__TO__E_net">
-            <connectionWD id="0" preCellId="../expoisson/0/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/0/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="1" preCellId="../expoisson/1/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/1/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="2" preCellId="../expoisson/2/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/2/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="3" preCellId="../expoisson/3/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/3/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="4" preCellId="../expoisson/4/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/4/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="5" preCellId="../expoisson/5/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/5/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="6" preCellId="../expoisson/6/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/6/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="7" preCellId="../expoisson/7/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/7/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="8" preCellId="../expoisson/8/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/8/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="9" preCellId="../expoisson/9/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/9/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="10" preCellId="../expoisson/10/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/10/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="11" preCellId="../expoisson/11/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/11/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="12" preCellId="../expoisson/12/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/12/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="13" preCellId="../expoisson/13/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/13/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="14" preCellId="../expoisson/14/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/14/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="15" preCellId="../expoisson/15/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/15/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="16" preCellId="../expoisson/16/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/16/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="17" preCellId="../expoisson/17/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/17/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="18" preCellId="../expoisson/18/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/18/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="19" preCellId="../expoisson/19/SpikeSourcePoisson_expoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../E_net/19/IF_curr_alpha_E_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="0" preCellId="../expoisson/0/SpikeSourcePoisson_expoisson" postCellId="../E_net/0/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="1" preCellId="../expoisson/1/SpikeSourcePoisson_expoisson" postCellId="../E_net/1/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="2" preCellId="../expoisson/2/SpikeSourcePoisson_expoisson" postCellId="../E_net/2/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="3" preCellId="../expoisson/3/SpikeSourcePoisson_expoisson" postCellId="../E_net/3/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="4" preCellId="../expoisson/4/SpikeSourcePoisson_expoisson" postCellId="../E_net/4/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="5" preCellId="../expoisson/5/SpikeSourcePoisson_expoisson" postCellId="../E_net/5/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="6" preCellId="../expoisson/6/SpikeSourcePoisson_expoisson" postCellId="../E_net/6/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="7" preCellId="../expoisson/7/SpikeSourcePoisson_expoisson" postCellId="../E_net/7/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="8" preCellId="../expoisson/8/SpikeSourcePoisson_expoisson" postCellId="../E_net/8/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="9" preCellId="../expoisson/9/SpikeSourcePoisson_expoisson" postCellId="../E_net/9/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="10" preCellId="../expoisson/10/SpikeSourcePoisson_expoisson" postCellId="../E_net/10/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="11" preCellId="../expoisson/11/SpikeSourcePoisson_expoisson" postCellId="../E_net/11/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="12" preCellId="../expoisson/12/SpikeSourcePoisson_expoisson" postCellId="../E_net/12/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="13" preCellId="../expoisson/13/SpikeSourcePoisson_expoisson" postCellId="../E_net/13/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="14" preCellId="../expoisson/14/SpikeSourcePoisson_expoisson" postCellId="../E_net/14/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="15" preCellId="../expoisson/15/SpikeSourcePoisson_expoisson" postCellId="../E_net/15/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="16" preCellId="../expoisson/16/SpikeSourcePoisson_expoisson" postCellId="../E_net/16/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="17" preCellId="../expoisson/17/SpikeSourcePoisson_expoisson" postCellId="../E_net/17/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="18" preCellId="../expoisson/18/SpikeSourcePoisson_expoisson" postCellId="../E_net/18/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="19" preCellId="../expoisson/19/SpikeSourcePoisson_expoisson" postCellId="../E_net/19/IF_curr_alpha_E_net" weight="0.000413635066326" delay="0.025ms"/>
         </projection>
         <projection id="E_net__TO__I_net" presynapticPopulation="E_net" postsynapticPopulation="I_net" synapse="syn__E_net__TO__I_net">
-            <connectionWD id="0" preCellId="../E_net/5/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/0/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="1" preCellId="../E_net/13/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/0/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="2" preCellId="../E_net/14/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/0/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="3" preCellId="../E_net/15/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/0/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="4" preCellId="../E_net/4/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/1/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="5" preCellId="../E_net/16/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/1/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="6" preCellId="../E_net/17/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/1/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="7" preCellId="../E_net/19/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/1/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="8" preCellId="../E_net/1/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/2/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="9" preCellId="../E_net/3/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/2/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="10" preCellId="../E_net/10/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/3/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="11" preCellId="../E_net/6/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/4/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
-            <connectionWD id="12" preCellId="../E_net/13/IF_curr_alpha_E_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/4/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="0" preCellId="../E_net/5/IF_curr_alpha_E_net" postCellId="../I_net/0/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="1" preCellId="../E_net/6/IF_curr_alpha_E_net" postCellId="../I_net/0/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="2" preCellId="../E_net/15/IF_curr_alpha_E_net" postCellId="../I_net/0/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="3" preCellId="../E_net/3/IF_curr_alpha_E_net" postCellId="../I_net/1/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="4" preCellId="../E_net/8/IF_curr_alpha_E_net" postCellId="../I_net/1/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="5" preCellId="../E_net/10/IF_curr_alpha_E_net" postCellId="../I_net/1/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="6" preCellId="../E_net/13/IF_curr_alpha_E_net" postCellId="../I_net/2/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="7" preCellId="../E_net/9/IF_curr_alpha_E_net" postCellId="../I_net/3/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="8" preCellId="../E_net/10/IF_curr_alpha_E_net" postCellId="../I_net/3/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="9" preCellId="../E_net/13/IF_curr_alpha_E_net" postCellId="../I_net/3/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="10" preCellId="../E_net/15/IF_curr_alpha_E_net" postCellId="../I_net/3/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="11" preCellId="../E_net/16/IF_curr_alpha_E_net" postCellId="../I_net/3/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="12" preCellId="../E_net/2/IF_curr_alpha_E_net" postCellId="../I_net/4/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="13" preCellId="../E_net/18/IF_curr_alpha_E_net" postCellId="../I_net/4/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
+            <connectionWD id="14" preCellId="../E_net/19/IF_curr_alpha_E_net" postCellId="../I_net/4/IF_curr_alpha_I_net" weight="0.000413635066326" delay="1.5ms"/>
         </projection>
         <projection id="I_net__TO__I_net" presynapticPopulation="I_net" postsynapticPopulation="I_net" synapse="syn__I_net__TO__I_net">
-            <connectionWD id="0" preCellId="../I_net/2/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/1/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
-            <connectionWD id="1" preCellId="../I_net/4/IF_curr_alpha_I_net" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/1/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="0" preCellId="../I_net/0/IF_curr_alpha_I_net" postCellId="../I_net/1/IF_curr_alpha_I_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="1" preCellId="../I_net/1/IF_curr_alpha_I_net" postCellId="../I_net/1/IF_curr_alpha_I_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="2" preCellId="../I_net/0/IF_curr_alpha_I_net" postCellId="../I_net/3/IF_curr_alpha_I_net" weight="-0.001654540265306" delay="1.5ms"/>
+            <connectionWD id="3" preCellId="../I_net/3/IF_curr_alpha_I_net" postCellId="../I_net/4/IF_curr_alpha_I_net" weight="-0.001654540265306" delay="1.5ms"/>
         </projection>
         <projection id="inpoisson__TO__I_net" presynapticPopulation="inpoisson" postsynapticPopulation="I_net" synapse="syn__inpoisson__TO__I_net">
-            <connectionWD id="0" preCellId="../inpoisson/0/SpikeSourcePoisson_inpoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/0/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="1" preCellId="../inpoisson/1/SpikeSourcePoisson_inpoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/1/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="2" preCellId="../inpoisson/2/SpikeSourcePoisson_inpoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/2/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="3" preCellId="../inpoisson/3/SpikeSourcePoisson_inpoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/3/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
-            <connectionWD id="4" preCellId="../inpoisson/4/SpikeSourcePoisson_inpoisson" preSegmentId="0" preFractionAlong="0.5" postCellId="../I_net/4/IF_curr_alpha_I_net" postSegmentId="0" postFractionAlong="0.5" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="0" preCellId="../inpoisson/0/SpikeSourcePoisson_inpoisson" postCellId="../I_net/0/IF_curr_alpha_I_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="1" preCellId="../inpoisson/1/SpikeSourcePoisson_inpoisson" postCellId="../I_net/1/IF_curr_alpha_I_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="2" preCellId="../inpoisson/2/SpikeSourcePoisson_inpoisson" postCellId="../I_net/2/IF_curr_alpha_I_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="3" preCellId="../inpoisson/3/SpikeSourcePoisson_inpoisson" postCellId="../I_net/3/IF_curr_alpha_I_net" weight="0.000413635066326" delay="0.025ms"/>
+            <connectionWD id="4" preCellId="../inpoisson/4/SpikeSourcePoisson_inpoisson" postCellId="../I_net/4/IF_curr_alpha_I_net" weight="0.000413635066326" delay="0.025ms"/>
         </projection>
     </network>
 </neuroml>

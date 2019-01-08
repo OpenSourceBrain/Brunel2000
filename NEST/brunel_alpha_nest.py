@@ -1,3 +1,9 @@
+#
+# This file is taken from the NEST standard examples
+#
+# Copyright (C) 2004 The NEST Initiative
+#
+
 import nest
 from scipy.special import lambertw
 

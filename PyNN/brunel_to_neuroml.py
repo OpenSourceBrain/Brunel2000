@@ -5,8 +5,14 @@ A scaled down version of the Brunel model converted to NeuroML 2
 
 from brunel08 import runBrunelNetwork
 import shutil
+import sys
 
-simulator_name = 'neuroml'
+print sys.argv
+if len(sys.argv)>1:
+    simulator_name = sys.argv[1]
+else:
+    simulator_name = 'neuroml'
+    
 simtime = 1000
 order = 5
 
