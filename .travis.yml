@@ -45,6 +45,7 @@ install:
 script:
     - pwd
     - omv all -V
+    - omv list -V
     
     
     
