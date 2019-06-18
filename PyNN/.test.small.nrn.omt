@@ -11,6 +11,7 @@ experiments:
         spiketimes file: 
           path: brunel-PyNN-neuron-E_net-0.gdf
           format: TIME_ID
+          scaling: 0.001
           id: 0
         tolerance: 0.003091149274902911
   spike_rate_i:
@@ -19,6 +20,7 @@ experiments:
         spiketimes file: 
           path: brunel-PyNN-neuron-I_net-0.gdf
           format: TIME_ID
+          scaling: 0.001
           id: 0
         tolerance: 0.008231242178950186
         
@@ -28,6 +30,7 @@ experiments:
         spiketimes file: 
           path: brunel-PyNN-neuron-expoisson-0.gdf
           format: TIME_ID
+          scaling: 0.001
           id: 0
         tolerance: 0.003853429031591052
   spike_rate_inh_in:
@@ -36,5 +39,6 @@ experiments:
         spiketimes file: 
           path: brunel-PyNN-neuron-inpoisson-0.gdf
           format: TIME_ID
+          scaling: 0.001
           id: 0
         tolerance: 0.00806801623469927

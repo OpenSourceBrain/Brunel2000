@@ -11,6 +11,7 @@ experiments:
         spiketimes file: 
           path: brunel-PyNN-nest-E_net-0.gdf
           format: TIME_ID
+          scaling: 0.001
           id: 0
         tolerance: 0.00
   spike_rate_i:
@@ -19,6 +20,7 @@ experiments:
         spiketimes file: 
           path: brunel-PyNN-nest-I_net-0.gdf
           format: TIME_ID
+          scaling: 0.001
           id: 0
         tolerance: 0.00
         
@@ -28,6 +30,7 @@ experiments:
         spiketimes file: 
           path: brunel-PyNN-nest-expoisson-0.gdf
           format: TIME_ID
+          scaling: 0.001
           id: 0
         tolerance: 0.00
   spike_rate_inh_in:
@@ -36,5 +39,6 @@ experiments:
         spiketimes file: 
           path: brunel-PyNN-nest-inpoisson-0.gdf
           format: TIME_ID
+          scaling: 0.001
           id: 0
         tolerance: 0.00

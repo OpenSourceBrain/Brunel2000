@@ -11,13 +11,15 @@ experiments:
         spiketimes file: 
           path: brunel-PyNN-brian-E_net-0.gdf
           format: TIME_ID
+          scaling: 0.001
           id: 0
-        tolerance: 0.6912246801705757   # Too high!!!
+        tolerance: 0.6912246801705757      # Too high!!!
   spike_rate_i:
     observables:
       spike rate:
         spiketimes file: 
           path: brunel-PyNN-brian-I_net-0.gdf
           format: TIME_ID
+          scaling: 0.001
           id: 0
-        tolerance: 0.6873950559701493   # Too high!!!
+        tolerance: 0.6873950559701493      # Too high!!!

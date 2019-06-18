@@ -146,14 +146,23 @@ def runBrunelNetwork(g=5.,
 
     print("%d Setting up random number generator" % rank)
     rng = NumpyRNG(kernelseed, parallel_safe=True)
+    
+    default_cell_radius = 5
+    stim_cell_radius = 3
 
     print("%d Creating excitatory population with %d neurons." % (rank, NE))
     celltype = IF_curr_alpha(**cell_params)
     celltype.default_initial_values['v'] = U0 # Setting default init v, useful for NML2 export
     E_net = Population(NE, celltype, label="E_net")
+    E_net.annotate(color='.9 0 0')
+    E_net.annotate(radius=default_cell_radius)
+    E_net.annotate(type='E') # temp indicator to use for connection arrowhead
 
     print("%d Creating inhibitory population with %d neurons." % (rank, NI))
     I_net = Population(NI, celltype, label="I_net")
+    I_net.annotate(color='0 0 0.9')
+    I_net.annotate(radius=default_cell_radius)
+    I_net.annotate(type='I') # temp indicator to use for connection arrowhead
 
     print("%d Initialising membrane potential to random values between %g mV and %g mV." % (rank, U0, theta))
     uniformDistr = RandomDistribution('uniform', low=U0, high=theta, rng=rng)
@@ -163,9 +172,15 @@ def runBrunelNetwork(g=5.,
     print("%d Creating excitatory Poisson generator with rate %g spikes/s." % (rank, p_rate))
     source_type = SpikeSourcePoisson(rate=p_rate)
     expoisson = Population(NE, source_type, label="expoisson")
+    expoisson.annotate(color='0.9 0.7 0.7')
+    expoisson.annotate(radius=stim_cell_radius)
+    expoisson.annotate(type='E') # temp indicator to use for connection arrowhead
 
     print("%d Creating inhibitory Poisson generator with the same rate." % rank)
     inpoisson = Population(NI, source_type, label="inpoisson")
+    inpoisson.annotate(color='0.7 0.7 0.9')
+    inpoisson.annotate(radius=stim_cell_radius)
+    inpoisson.annotate(type='E') # temp indicator to use for connection arrowhead
 
     # Record spikes
     print("%d Setting up recording in excitatory population." % rank)

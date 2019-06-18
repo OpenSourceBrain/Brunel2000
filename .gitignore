@@ -38,3 +38,4 @@ NEST/*.gdf
 /PyNN/*_netpyne.py
 /PyNN/*.py_main.json
 *.gv*
+/NeuroML2/BrunelFromPyNN.net.png
