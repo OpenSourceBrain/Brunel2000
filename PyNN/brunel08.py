@@ -11,7 +11,6 @@ May 2006
 
 from pyNN.utility import get_script_args, Timer, ProgressBar
 from pyNN.random import NumpyRNG, RandomDistribution
-from neo.io import PyNNTextIO
 
 
 def runBrunelNetwork(g=5., 
@@ -214,19 +213,44 @@ def runBrunelNetwork(g=5.,
     simCPUTime = timer.elapsedTime()
 
     # write data to file
-    #print("%d Writing data to file." % rank)
-    #(E_net + I_net).write_data("Results/brunel_np%d_%s.pkl" % (np, simulator_name))
     if save and not simulator_name=='neuroml':
+        import numpy
         for pop in [E_net , I_net]:
-            io = PyNNTextIO(filename="brunel-PyNN-%s-%s-%i.gdf"%(simulator_name, pop.label, rank))
+            filename="brunel-PyNN-%s-%s-%i.gdf"%(simulator_name, pop.label, rank)
+            ff = open(filename, 'w')
+            
             spikes =  pop.get_data('spikes', gather=False)
-            for segment in spikes.segments:
-                io.write_segment(segment)
+            spiketrains = spikes.segments[0].spiketrains
+            print('Saving data recorded for spikes in pop %s, indices: %s to %s'%(pop.label, [s.annotations['source_id'] for s in spiketrains], filename))
+            for spiketrain in spiketrains:
+                source_id = spiketrain.annotations['source_id']
+                source_index = spiketrain.annotations['source_index']
+                print("Writing spike data for cell %s[%s] (gid: %i): %i spikes: [%s,...,%s] "%(pop.label,source_index, source_id, len(spiketrain),spiketrain[0],spiketrain[-1]))
+                for t in spiketrain:
+                    ff.write('%s\t%i\n'%(t.magnitude,source_index))
+            ff.close()
+            
+            data =  pop.get_data('v', gather=False)
+            analogsignal = data.segments[0].analogsignals[0]
+            name = analogsignal.name
+            source_ids = analogsignal.annotations['source_ids']
+            
+            print('Saving data recorded for %s in pop %s, global ids: %s'%(name, pop.label, source_ids))
+            for i in range(len(source_ids)):
+                times_vm_a = []
+                glob_id = source_ids[i]
+                index_in_pop = pop.id_to_index(glob_id)
+                filename="brunel-PyNN-%s-%s%i-%i.dat"%(simulator_name, pop.label, index_in_pop, rank)
+                print("Writing data for cell %i = %s[%s] (gid: %i) to %s "%(i, pop.label,index_in_pop, glob_id, filename))
                 
-            io = PyNNTextIO(filename="brunel-PyNN-%s-%s-%i.dat"%(simulator_name, pop.label, rank))
-            vs =  pop.get_data('v', gather=False)
-            for segment in vs.segments:
-                io.write_segment(segment)
+                vm = analogsignal.transpose()[i]
+                if len(times_vm_a)==0:
+                    tt = numpy.array([t*get_time_step()/1000. for t in range(len(vm))])
+                    times_vm_a.append(tt)
+                times_vm_a.append(vm/1000.)
+
+                times_vm = numpy.array(times_vm_a).transpose()
+                numpy.savetxt(filename, times_vm , delimiter = '\t', fmt='%s')
             
     spike_data = {}
     spike_data['senders'] = []
