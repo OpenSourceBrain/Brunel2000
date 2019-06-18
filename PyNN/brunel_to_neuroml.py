@@ -31,9 +31,10 @@ runBrunelNetwork(g=g,
                  simulator_name=simulator_name,
                  extra={'reference':'BrunelFromPyNN'})
 
-shutil.copy('BrunelFromPyNN.net.nml','../NeuroML2')
-#shutil.copy('BrunelFromPyNN.net.nml','../NeuroML2')
-shutil.copy('LEMS_Sim_BrunelFromPyNN.xml','../NeuroML2/LEMS_Sim_BrunelFromPyNN.xml')
+if simulator_name == 'neuroml':
+    shutil.copy('BrunelFromPyNN.net.nml','../NeuroML2')
+    #shutil.copy('BrunelFromPyNN.net.nml','../NeuroML2')
+    shutil.copy('LEMS_Sim_BrunelFromPyNN.xml','../NeuroML2/LEMS_Sim_BrunelFromPyNN.xml')
 
 
 

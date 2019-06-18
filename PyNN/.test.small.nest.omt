@@ -1,8 +1,8 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
  
-target: brunel_test.py 
+target: brunel_to_neuroml.py 
 engine: PyNN_Nest
-mep: .test.pynn8.mep
+mep: .test.small.mep
 experiments:
 
   spike_rate_e:

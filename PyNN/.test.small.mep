@@ -1,0 +1,17 @@
+system: Test scaled down version of Brunel
+
+experiments:
+
+    spike_rate_e:
+        expected:
+            spike rate: 0.022261680756897145
+    spike_rate_i:
+        expected:
+            spike rate: 0.02210759027266028
+
+    spike_rate_exc_in:
+        expected:
+            spike rate: 9.996045685612621
+    spike_rate_inh_in:
+        expected:
+            spike rate: 10.106064910951188

@@ -8,3 +8,10 @@ experiments:
     spike_rate_i:
         expected:
             spike rate: 0.06479700313860484
+
+    spike_rate_exc_in:
+        expected:
+            spike rate: 19.944724020769435
+    spike_rate_inh_in:
+        expected:
+            spike rate: 19.836295864504915

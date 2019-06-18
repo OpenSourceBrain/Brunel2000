@@ -177,6 +177,10 @@ def runBrunelNetwork(g=5.,
     I_net.record('spikes')
     if N_rec_v>0:
         I_net[0:min(NI,N_rec_v)].record('v')
+        
+    print("%d Setting up recording in inputs." % rank)
+    expoisson.record('spikes')
+    inpoisson.record('spikes')
 
     progress_bar = ProgressBar(width=20)
     connector = FixedProbabilityConnector(epsilon, rng=rng, callback=progress_bar)
@@ -215,7 +219,7 @@ def runBrunelNetwork(g=5.,
     # write data to file
     if save and not simulator_name=='neuroml':
         import numpy
-        for pop in [E_net , I_net]:
+        for pop in [E_net , I_net, expoisson, inpoisson]:
             filename="brunel-PyNN-%s-%s-%i.gdf"%(simulator_name, pop.label, rank)
             ff = open(filename, 'w')
             
@@ -225,11 +229,19 @@ def runBrunelNetwork(g=5.,
             for spiketrain in spiketrains:
                 source_id = spiketrain.annotations['source_id']
                 source_index = spiketrain.annotations['source_index']
-                print("Writing spike data for cell %s[%s] (gid: %i): %i spikes: [%s,...,%s] "%(pop.label,source_index, source_id, len(spiketrain),spiketrain[0],spiketrain[-1]))
+                '''
+                print("Writing spike data for cell %s[%s] (gid: %i): %i spikes: [%s,...,%s] "% \
+                      (pop.label,
+                       source_index, 
+                       source_id, 
+                       len(spiketrain),
+                       spiketrain[0] if len(spiketrain)>1 else '-',
+                       spiketrain[-1] if len(spiketrain)>1 else '-'))'''
                 for t in spiketrain:
                     ff.write('%s\t%i\n'%(t.magnitude,source_index))
             ff.close()
             
+        for pop in [E_net , I_net]:
             data =  pop.get_data('v', gather=False)
             analogsignal = data.segments[0].analogsignals[0]
             name = analogsignal.name

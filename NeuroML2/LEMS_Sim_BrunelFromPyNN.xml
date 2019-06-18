@@ -2,9 +2,9 @@
     
     <!-- 
     This LEMS file has been generated from: 
-        PyNN v0.9.2
-        libNeuroML v0.2.45
-        pyNeuroML v0.3.14
+        PyNN v0.9.4
+        libNeuroML v0.2.47
+        pyNeuroML v0.3.16
      -->
     
     <!-- Specify which component to run -->
@@ -69,6 +69,37 @@
             <EventSelection id="4" select="I_net/4/IF_curr_alpha_I_net" eventPort="spike"/> 
             <EventSelection id="0" select="I_net/0/IF_curr_alpha_I_net" eventPort="spike"/> 
             <EventSelection id="1" select="I_net/1/IF_curr_alpha_I_net" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="Spikes_file_expoisson" fileName="expoisson.spikes" format="TIME_ID">
+            <EventSelection id="0" select="expoisson/0/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="1" select="expoisson/1/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="2" select="expoisson/2/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="3" select="expoisson/3/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="4" select="expoisson/4/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="5" select="expoisson/5/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="6" select="expoisson/6/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="7" select="expoisson/7/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="8" select="expoisson/8/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="9" select="expoisson/9/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="10" select="expoisson/10/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="11" select="expoisson/11/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="12" select="expoisson/12/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="13" select="expoisson/13/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="14" select="expoisson/14/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="15" select="expoisson/15/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="16" select="expoisson/16/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="17" select="expoisson/17/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="18" select="expoisson/18/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="19" select="expoisson/19/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+        </EventOutputFile>
+        
+        <EventOutputFile id="Spikes_file_inpoisson" fileName="inpoisson.spikes" format="TIME_ID">
+            <EventSelection id="1" select="inpoisson/1/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
+            <EventSelection id="2" select="inpoisson/2/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
+            <EventSelection id="3" select="inpoisson/3/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
+            <EventSelection id="4" select="inpoisson/4/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
+            <EventSelection id="0" select="inpoisson/0/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
         </EventOutputFile>
         
     </Simulation>
