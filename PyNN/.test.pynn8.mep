@@ -1,0 +1,10 @@
+system: Test Brunel
+
+experiments:
+
+    spike_rate_e:
+        expected:
+            spike rate: 0.06560065600656007
+    spike_rate_i:
+        expected:
+            spike rate: 0.06479700313860484

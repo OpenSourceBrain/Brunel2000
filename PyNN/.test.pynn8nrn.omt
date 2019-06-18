@@ -2,3 +2,22 @@
  
 target: brunel_test.py 
 engine: PyNN_NEURON
+mep: .test.pynn8.mep
+experiments:
+
+  spike_rate_e:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: brunel-PyNN-neuron-E_net-0.gdf
+          format: TIME_ID
+          id: 0
+        tolerance: 0.008133387555560452
+  spike_rate_i:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: brunel-PyNN-neuron-I_net-0.gdf
+          format: TIME_ID
+          id: 0
+        tolerance: 0.00044495990505845356
