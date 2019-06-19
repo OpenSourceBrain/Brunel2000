@@ -12,7 +12,7 @@ experiments:
           path: brunel-PyNN-nest-E_net-0.gdf
           format: TIME_ID
           scaling: 0.001
-          id: 0
+          ids: 0
         tolerance: 0.00
   spike_rate_i:
     observables:
@@ -21,7 +21,7 @@ experiments:
           path: brunel-PyNN-nest-I_net-0.gdf
           format: TIME_ID
           scaling: 0.001
-          id: 0
+          ids: 0
         tolerance: 0.00
         
   spike_rate_exc_in:
@@ -31,7 +31,7 @@ experiments:
           path: brunel-PyNN-nest-expoisson-0.gdf
           format: TIME_ID
           scaling: 0.001
-          id: 0
+          ids: 0
         tolerance: 0.00
   spike_rate_inh_in:
     observables:
@@ -40,5 +40,5 @@ experiments:
           path: brunel-PyNN-nest-inpoisson-0.gdf
           format: TIME_ID
           scaling: 0.001
-          id: 0
+          ids: 0
         tolerance: 0.00
