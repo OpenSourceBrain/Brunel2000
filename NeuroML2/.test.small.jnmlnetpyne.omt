@@ -1,0 +1,42 @@
+# Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
+ 
+target: LEMS_Sim_BrunelFromPyNN.xml
+engine: jNeuroML_NetPyNE
+mep: ../PyNN/.test.small.mep
+experiments:
+
+  spike_rate_e:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: E_net.spikes
+          format: TIME_ID
+          ids: 0
+        tolerance: 0.023777488103574197
+  spike_rate_i:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: I_net.spikes
+          format: TIME_ID
+          ids: 0
+        tolerance: 0.09827351403373331
+        
+  spike_rate_exc_in:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: expoisson.spikes
+          format: TIME_ID
+          scaling: 1
+          ids: 0
+        tolerance: 0.0021004200850149573
+  spike_rate_inh_in:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: inpoisson.spikes
+          format: TIME_ID
+          scaling: 1
+          ids: 0
+        tolerance: 0.019554888721160752
