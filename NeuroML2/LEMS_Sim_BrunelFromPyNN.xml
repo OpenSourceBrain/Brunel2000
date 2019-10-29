@@ -4,7 +4,7 @@
     This LEMS file has been generated from: 
         PyNN v0.9.4
         libNeuroML v0.2.47
-        pyNeuroML v0.3.16
+        pyNeuroML v0.3.19
      -->
     
     <!-- Specify which component to run -->
