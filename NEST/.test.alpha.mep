@@ -1,0 +1,10 @@
+system: Test Nest Alpha
+
+experiments:
+
+    spike_rate_e:
+        expected:
+            spike rate: 28.928481372824894
+    spike_rate_i:
+        expected:
+            spike rate: 28.693396590823237
