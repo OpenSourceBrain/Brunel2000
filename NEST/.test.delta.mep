@@ -4,7 +4,7 @@ experiments:
 
     spike_rate_e:
         expected:
-            spike rate: 53.15965401139505
+            spike rate: 52.97132290566713
     spike_rate_i:
         expected:
-            spike rate: 52.79828050903128
+            spike rate: 53.25346318253314
