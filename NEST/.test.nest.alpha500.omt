@@ -1,24 +1,24 @@
 # Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
  
-target: brunel_alpha_nest.py 
+target: brunel_alpha500_nest.py 
 engine: PyNEST
-mep: .test.alpha.mep
+mep: .test.alpha500.mep
 experiments:
 
   spike_rate_e:
     observables:
       spike rate:
         spiketimes file: 
-          path: brunel-py-ex-12502-0.gdf
+          path: brunel-py-ex-502-0.gdf
           format: ID_TIME
           scaling: 0.001
           ids: '*'
-        tolerance: 8.41568302629e-05  # due to small differences between nest 2.12/2.14 and 2.16
+        tolerance: 0.00
   spike_rate_i:
     observables:
       spike rate:
         spiketimes file: 
-          path: brunel-py-in-12503-0.gdf
+          path: brunel-py-in-503-0.gdf
           format: ID_TIME
           scaling: 0.001
           ids: '*'

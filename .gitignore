@@ -40,3 +40,4 @@ NEST/*.gdf
 *.gv*
 /NeuroML2/BrunelFromPyNN.net.png
 /NEST/clean.sh
+/PyNN/clean.sh
