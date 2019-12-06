@@ -2,3 +2,24 @@
  
 target: brunel_delta_nest.py 
 engine: PyNEST
+mep: .test.delta.mep
+experiments:
+
+  spike_rate_e:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: brunel-py-ex-2502-0.gdf
+          format: ID_TIME
+          scaling: 0.001
+          ids: '*'
+        tolerance: 0.00
+  spike_rate_i:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: brunel-py-in-2503-0.gdf
+          format: ID_TIME
+          scaling: 0.001
+          ids: '*'
+        tolerance: 0.00

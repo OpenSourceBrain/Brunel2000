@@ -39,3 +39,4 @@ NEST/*.gdf
 /PyNN/*.py_main.json
 *.gv*
 /NeuroML2/BrunelFromPyNN.net.png
+/NEST/clean.sh
