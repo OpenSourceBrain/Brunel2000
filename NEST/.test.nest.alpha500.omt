@@ -13,7 +13,7 @@ experiments:
           format: ID_TIME
           scaling: 0.001
           ids: '*'
-        tolerance: 0.00
+        tolerance: 1.9978618179684424e-05  # due to small differences between nest 2.12/2.14 and 2.16
   spike_rate_i:
     observables:
       spike rate:
@@ -22,4 +22,4 @@ experiments:
           format: ID_TIME
           scaling: 0.001
           ids: '*'
-        tolerance: 0.00
+        tolerance: 8.651549318282133e-06   # due to small differences between nest 2.12/2.14 and 2.16
