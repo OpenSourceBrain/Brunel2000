@@ -12,6 +12,7 @@ May 2006
 from pyNN.utility import get_script_args, Timer, ProgressBar
 from pyNN.random import NumpyRNG, RandomDistribution
 
+from importlib import import_module
 
 def runBrunelNetwork(g=5., 
                      eta=2., 
@@ -27,7 +28,7 @@ def runBrunelNetwork(g=5.,
                      jnml_simulator=None,
                      extra = {}):
 
-    exec("from pyNN.%s import *" % simulator_name) in globals()
+    sim = import_module("pyNN.%s" % simulator_name)
     
     timer = Timer()
 
@@ -124,9 +125,9 @@ def runBrunelNetwork(g=5.,
 
     #extra = {'threads' : 2}
 
-    rank = setup(timestep=dt, max_delay=delay, **extra)
+    rank = sim.setup(timestep=dt, max_delay=delay, **extra)
     print("rank =", rank)
-    np = num_processes()
+    np = sim.num_processes()
     print("np =", np)
     import socket
     host_name = socket.gethostname()
@@ -151,15 +152,15 @@ def runBrunelNetwork(g=5.,
     stim_cell_radius = 3
 
     print("%d Creating excitatory population with %d neurons." % (rank, NE))
-    celltype = IF_curr_alpha(**cell_params)
+    celltype = sim.IF_curr_alpha(**cell_params)
     celltype.default_initial_values['v'] = U0 # Setting default init v, useful for NML2 export
-    E_net = Population(NE, celltype, label="E_net")
+    E_net = sim.Population(NE, celltype, label="E_net")
     E_net.annotate(color='.9 0 0')
     E_net.annotate(radius=default_cell_radius)
     E_net.annotate(type='E') # temp indicator to use for connection arrowhead
 
     print("%d Creating inhibitory population with %d neurons." % (rank, NI))
-    I_net = Population(NI, celltype, label="I_net")
+    I_net = sim.Population(NI, celltype, label="I_net")
     I_net.annotate(color='0 0 0.9')
     I_net.annotate(radius=default_cell_radius)
     I_net.annotate(type='I') # temp indicator to use for connection arrowhead
@@ -170,14 +171,14 @@ def runBrunelNetwork(g=5.,
     I_net.initialize(v=uniformDistr)
 
     print("%d Creating excitatory Poisson generator with rate %g spikes/s." % (rank, p_rate))
-    source_type = SpikeSourcePoisson(rate=p_rate)
-    expoisson = Population(NE, source_type, label="expoisson")
+    source_type = sim.SpikeSourcePoisson(rate=p_rate)
+    expoisson = sim.Population(NE, source_type, label="expoisson")
     expoisson.annotate(color='0.9 0.7 0.7')
     expoisson.annotate(radius=stim_cell_radius)
     expoisson.annotate(type='E') # temp indicator to use for connection arrowhead
 
     print("%d Creating inhibitory Poisson generator with the same rate." % rank)
-    inpoisson = Population(NI, source_type, label="inpoisson")
+    inpoisson = sim.Population(NI, source_type, label="inpoisson")
     inpoisson.annotate(color='0.7 0.7 0.9')
     inpoisson.annotate(radius=stim_cell_radius)
     inpoisson.annotate(type='E') # temp indicator to use for connection arrowhead
@@ -198,26 +199,26 @@ def runBrunelNetwork(g=5.,
     inpoisson.record('spikes')
 
     progress_bar = ProgressBar(width=20)
-    connector = FixedProbabilityConnector(epsilon, rng=rng, callback=progress_bar)
-    E_syn = StaticSynapse(weight=JE, delay=delay)
-    I_syn = StaticSynapse(weight=JI, delay=delay)
-    ext_Connector = OneToOneConnector(callback=progress_bar)
-    ext_syn = StaticSynapse(weight=JE, delay=dt)
+    connector = sim.FixedProbabilityConnector(epsilon, rng=rng, callback=progress_bar)
+    E_syn = sim.StaticSynapse(weight=JE, delay=delay)
+    I_syn = sim.StaticSynapse(weight=JI, delay=delay)
+    ext_Connector = sim.OneToOneConnector(callback=progress_bar)
+    ext_syn = sim.StaticSynapse(weight=JE, delay=dt)
 
     print("%d Connecting excitatory population with connection probability %g, weight %g nA and delay %g ms." % (rank, epsilon, JE, delay))
-    E_to_E = Projection(E_net, E_net, connector, E_syn, receptor_type="excitatory")
+    E_to_E = sim.Projection(E_net, E_net, connector, E_syn, receptor_type="excitatory")
     print("E --> E\t\t", len(E_to_E), "connections")
-    I_to_E = Projection(I_net, E_net, connector, I_syn, receptor_type="inhibitory")
+    I_to_E = sim.Projection(I_net, E_net, connector, I_syn, receptor_type="inhibitory")
     print("I --> E\t\t", len(I_to_E), "connections")
-    input_to_E = Projection(expoisson, E_net, ext_Connector, ext_syn, receptor_type="excitatory")
+    input_to_E = sim.Projection(expoisson, E_net, ext_Connector, ext_syn, receptor_type="excitatory")
     print("input --> E\t", len(input_to_E), "connections")
 
     print("%d Connecting inhibitory population with connection probability %g, weight %g nA and delay %g ms." % (rank, epsilon, JI, delay))
-    E_to_I = Projection(E_net, I_net, connector, E_syn, receptor_type="excitatory")
+    E_to_I = sim.Projection(E_net, I_net, connector, E_syn, receptor_type="excitatory")
     print("E --> I\t\t", len(E_to_I), "connections")
-    I_to_I = Projection(I_net, I_net, connector, I_syn, receptor_type="inhibitory")
+    I_to_I = sim.Projection(I_net, I_net, connector, I_syn, receptor_type="inhibitory")
     print("I --> I\t\t", len(I_to_I), "connections")
-    input_to_I = Projection(inpoisson, I_net, ext_Connector, ext_syn, receptor_type="excitatory")
+    input_to_I = sim.Projection(inpoisson, I_net, ext_Connector, ext_syn, receptor_type="excitatory")
     print("input --> I\t", len(input_to_I), "connections")
 
     # read out time used for building
@@ -227,7 +228,7 @@ def runBrunelNetwork(g=5.,
     # run, measure computer time
     timer.start()  # start timer on construction
     print("%d Running simulation for %g ms (dt=%sms)." % (rank, simtime, dt))
-    run(simtime)
+    sim.run(simtime)
     print("Done")
     simCPUTime = timer.elapsedTime()
 
@@ -272,7 +273,7 @@ def runBrunelNetwork(g=5.,
                 
                 vm = analogsignal.transpose()[i]
                 if len(times_vm_a)==0:
-                    tt = numpy.array([t*get_time_step()/1000. for t in range(len(vm))])
+                    tt = numpy.array([t*sim.get_time_step()/1000. for t in range(len(vm))])
                     times_vm_a.append(tt)
                 times_vm_a.append(vm/1000.)
 
@@ -320,7 +321,7 @@ def runBrunelNetwork(g=5.,
 
     # === Clean up and quit ========================================================
 
-    end()
+    sim.end()
     
     
     if simulator_name=='neuroml' and jnml_simulator:
