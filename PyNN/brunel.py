@@ -113,46 +113,46 @@ rank = setup(timestep=dt, max_delay=delay, **extra)
 np = num_processes()
 import socket
 host_name = socket.gethostname()
-print "Host #%d is on %s" % (rank+1, host_name)
+print("Host #%d is on %s" % (rank+1, host_name))
 
 if extra.has_key('threads'):
-    print "%d Initialising the simulator with %d threads..." %(rank, extra['threads'])
+    print("%d Initialising the simulator with %d threads..." %(rank, extra['threads']))
 else:
-    print "%d Initialising the simulator with single thread..." %(rank)
+    print("%d Initialising the simulator with single thread..." %(rank))
 
 # Small function to display information only on node 1
 def nprint(s):
     if (rank == 0):
-        print s
+        print(s)
 
 timer.start() # start timer on construction    
 
-print "%d Setting up random number generator" %rank
+print("%d Setting up random number generator" %rank)
 rng = NumpyRNG(kernelseed, parallel_safe=True)
 
-print "%d Creating excitatory population with %d neurons." % (rank, NE)
+print("%d Creating excitatory population with %d neurons." % (rank, NE))
 E_net = Population(NE, IF_curr_alpha, cell_params, label="E_net")
 
-print "%d Creating inhibitory population with %d neurons." % (rank, NI)
+print("%d Creating inhibitory population with %d neurons." % (rank, NI))
 I_net = Population(NI, IF_curr_alpha, cell_params, label="I_net")
 
-print "%d Initialising membrane potential to random values between %g mV and %g mV." % (rank, U0, theta)
+print("%d Initialising membrane potential to random values between %g mV and %g mV." % (rank, U0, theta))
 uniformDistr = RandomDistribution('uniform', [U0, theta], rng)
 E_net.initialize('v', uniformDistr)
 I_net.initialize('v', uniformDistr)
 
-print "%d Creating excitatory Poisson generator with rate %g spikes/s." % (rank, p_rate)
+print("%d Creating excitatory Poisson generator with rate %g spikes/s." % (rank, p_rate))
 expoisson = Population(NE, SpikeSourcePoisson, {'rate': p_rate}, "expoisson")
 
-print "%d Creating inhibitory Poisson generator with the same rate." % rank
+print("%d Creating inhibitory Poisson generator with the same rate." % rank)
 inpoisson = Population(NI, SpikeSourcePoisson, {'rate': p_rate}, "inpoisson")
 
 # Record spikes
-print "%d Setting up recording in excitatory population." % rank
+print("%d Setting up recording in excitatory population." % rank)
 E_net.record(Nrec)
 E_net[[0, 1]].record_v()
 
-print "%d Setting up recording in inhibitory population." % rank
+print("%d Setting up recording in inhibitory population." % rank)
 I_net.record(Nrec)
 I_net[[0, 1]].record_v()
 
@@ -160,21 +160,21 @@ E_Connector = FixedProbabilityConnector(epsilon, weights=JE, delays=delay, verbo
 I_Connector = FixedProbabilityConnector(epsilon, weights=JI, delays=delay, verbose=True)
 ext_Connector = OneToOneConnector(weights=JE, delays=dt, verbose=True)
 
-print "%d Connecting excitatory population with connection probability %g, weight %g nA and delay %g ms." % (rank, epsilon, JE, delay)
+print("%d Connecting excitatory population with connection probability %g, weight %g nA and delay %g ms." % (rank, epsilon, JE, delay))
 E_to_E = Projection(E_net, E_net, E_Connector, rng=rng, target="excitatory")
-print "E --> E\t\t", len(E_to_E), "connections"
+print("E --> E\t\t", len(E_to_E), "connections")
 I_to_E = Projection(I_net, E_net, I_Connector, rng=rng, target="inhibitory")
-print "I --> E\t\t", len(I_to_E), "connections"
+print("I --> E\t\t", len(I_to_E), "connections")
 input_to_E = Projection(expoisson, E_net, ext_Connector, target="excitatory")
-print "input --> E\t", len(input_to_E), "connections"
+print("input --> E\t", len(input_to_E), "connections")
 
-print "%d Connecting inhibitory population with connection probability %g, weight %g nA and delay %g ms." % (rank, epsilon, JI, delay)
+print("%d Connecting inhibitory population with connection probability %g, weight %g nA and delay %g ms." % (rank, epsilon, JI, delay))
 E_to_I = Projection(E_net, I_net, E_Connector, rng=rng, target="excitatory")
-print "E --> I\t\t", len(E_to_I), "connections"
+print("E --> I\t\t", len(E_to_I), "connections")
 I_to_I = Projection(I_net, I_net, I_Connector, rng=rng, target="inhibitory")
-print "I --> I\t\t", len(I_to_I), "connections"
+print("I --> I\t\t", len(I_to_I), "connections")
 input_to_I = Projection(inpoisson, I_net, ext_Connector, target="excitatory")
-print "input --> I\t", len(input_to_I), "connections"
+print("input --> I\t", len(input_to_I), "connections")
 
 # read out time used for building
 buildCPUTime = timer.elapsedTime()
@@ -182,11 +182,11 @@ buildCPUTime = timer.elapsedTime()
 
 # run, measure computer time
 timer.start() # start timer on construction
-print "%d Running simulation for %g ms." % (rank, simtime)
+print("%d Running simulation for %g ms." % (rank, simtime))
 run(simtime)
 simCPUTime = timer.elapsedTime()
 
-print "%d Writing data to file." % rank
+print("%d Writing data to file." % rank)
 exfilename  = "Results/Brunel_exc_np%d_%s.ras" % (np, simulator_name) # output file for excit. population  
 infilename  = "Results/Brunel_inh_np%d_%s.ras" % (np, simulator_name) # output file for inhib. population  
 vexfilename = "Results/Brunel_exc_np%d_%s.v"   % (np, simulator_name) # output file for membrane potential traces

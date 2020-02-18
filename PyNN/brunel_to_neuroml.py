@@ -7,7 +7,6 @@ from brunel08 import runBrunelNetwork
 import shutil
 import sys
 
-print sys.argv
 if len(sys.argv)>1:
     simulator_name = sys.argv[1]
 else:
