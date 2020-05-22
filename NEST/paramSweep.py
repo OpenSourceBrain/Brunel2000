@@ -177,6 +177,7 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
         pl.colorbar()
 
     fig = pl.figure(figsize=(16,8))
+    pl.jet()
     info = "%s (%s) %i exc, %i inh cells, %s ms"%(simulator_name.upper(),label,NE, N-NE, simtime)
     
     fig.canvas.set_window_title(info)
@@ -199,25 +200,39 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
     
 if __name__ == '__main__':
     
-    simtime = 1000.0
-    order = 500
-    
+    if '-nestsmall' in sys.argv:
+        
+        from brunel_alpha_nest import runBrunelNetwork as runBrunelNetworkAlpha
+        
+        runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=1000, order=50, quick=True)
+        
+    elif '-pynnnestsmall' in sys.argv:
+        
+        sys.path.append("../PyNN")
+        from brunel08 import runBrunelNetwork as runBrunelNetworkPyNN
+        
+        runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=1000, order=10, simulator_name='nest', quick=True)
+        
+    else:
+        simtime = 1000.0
+        order = 500
 
-    from brunel_delta_nest import runBrunelNetwork as runBrunelNetworkDelta
-    from brunel_alpha_nest import runBrunelNetwork as runBrunelNetworkAlpha
-    
-    sys.path.append("../PyNN")
-    from brunel08 import runBrunelNetwork as runBrunelNetworkPyNN
-    
-    #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=1000, order=500, quick=False)
-    #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=simtime, order=order)
-    runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=1000, order=50, quick=True)
-    #runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=100, order=10, simulator_name='nest', quick=True)
-    #runParameterSweep(runBrunelNetworkPyNN, "pynn_brian", simtime=1000, order=50, simulator_name='brian', quick=True)
-    
-    # Exponentially increasing sim time issue!! 
-    #runParameterSweep(runBrunelNetworkPyNN, "pynn_neuron", simtime=1000, order=50, simulator_name='neuron', quick=True)
-    
-    #runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=1000, order=50, simulator_name='nest', quick=True)
-    #runParameterSweep(runBrunelNetworkPyNN, "pynn_neuroml", simtime=1000, order=50, simulator_name='neuroml', jnml_simulator='jNeuroML', quick=True)
-    #runParameterSweep(runBrunelNetworkPyNN, "pynn_neuroml", simtime=1000, order=50, simulator_name='neuroml', jnml_simulator='jNeuroML_NEURON', quick=True)
+
+        from brunel_delta_nest import runBrunelNetwork as runBrunelNetworkDelta
+        from brunel_alpha_nest import runBrunelNetwork as runBrunelNetworkAlpha
+
+        sys.path.append("../PyNN")
+        from brunel08 import runBrunelNetwork as runBrunelNetworkPyNN
+
+        #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=1000, order=500, quick=False)
+        #runParameterSweep(runBrunelNetworkDelta, "delta", simtime=simtime, order=order)
+        runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=1000, order=50, quick=True)
+        #runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=100, order=10, simulator_name='nest', quick=True)
+        #runParameterSweep(runBrunelNetworkPyNN, "pynn_brian", simtime=1000, order=50, simulator_name='brian', quick=True)
+
+        # Exponentially increasing sim time issue!! 
+        #runParameterSweep(runBrunelNetworkPyNN, "pynn_neuron", simtime=1000, order=50, simulator_name='neuron', quick=True)
+
+        #runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=1000, order=50, simulator_name='nest', quick=True)
+        #runParameterSweep(runBrunelNetworkPyNN, "pynn_neuroml", simtime=1000, order=50, simulator_name='neuroml', jnml_simulator='jNeuroML', quick=True)
+        #runParameterSweep(runBrunelNetworkPyNN, "pynn_neuroml", simtime=1000, order=50, simulator_name='neuroml', jnml_simulator='jNeuroML_NEURON', quick=True)

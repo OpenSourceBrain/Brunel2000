@@ -1,0 +1,44 @@
+# Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
+ 
+target: brunel_to_neuroml.py 
+engine: PyNN_NEURON
+mep: .test.small.mep
+experiments:
+
+  spike_rate_e:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: brunel-PyNN-neuron-E_net-0.gdf
+          format: TIME_ID
+          scaling: 0.001
+          ids: 0
+        tolerance: 0.026022495541717282
+  spike_rate_i:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: brunel-PyNN-neuron-I_net-0.gdf
+          format: TIME_ID
+          scaling: 0.001
+          ids: 0
+        tolerance: 0.008231242178950153
+        
+  spike_rate_exc_in:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: brunel-PyNN-neuron-expoisson-0.gdf
+          format: TIME_ID
+          scaling: 0.001
+          ids: 0
+        tolerance: 0.003853429031591048
+  spike_rate_inh_in:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: brunel-PyNN-neuron-inpoisson-0.gdf
+          format: TIME_ID
+          scaling: 0.001
+          ids: 0
+        tolerance: 0.0080680162346995
