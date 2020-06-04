@@ -2,7 +2,7 @@
 
 Sparsely connected spiking neuron network from: [Brunel, Dynamics of Sparsely Connected Networks of Excitatory and Inhibitory Spiking Neurons, Journal of Computational Neuroscience 2000, Volume 8, Issue 3, pp 183-208](http://link.springer.com/article/10.1023%2FA%3A1008925309027).
 
-Comparing the Brunel 2000 model across implementations has started [here](https://github.com/OpenSourceBrain/Brunel2000/blob/master/NEST/README.md).
+Comparing the Brunel 2000 model across implementations has started [here](NEST/README.md).
 
 
 [![Build Status](https://travis-ci.org/OpenSourceBrain/Brunel2000.svg?branch=master)](https://travis-ci.org/OpenSourceBrain/Brunel2000)

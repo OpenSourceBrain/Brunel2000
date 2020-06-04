@@ -11,7 +11,7 @@ _Note: work in progress!_
 
 **NEST (alpha synapses)**
 
-![](NEST_alpha_N12500_1000.0ms.png)
+![](NEST_alpha_N12500_1000ms.png)
 
 **PyNN -> NEST**
 

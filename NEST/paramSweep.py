@@ -200,20 +200,36 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
     
 if __name__ == '__main__':
     
-    if '-nestsmall' in sys.argv:
+
+
+    if '-nestsmall' in sys.argv or '-all' in sys.argv:
         
         from brunel_alpha_nest import runBrunelNetwork as runBrunelNetworkAlpha
         
         runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=1000, order=50, quick=True)
         
-    elif '-pynnnestsmall' in sys.argv:
+    if '-nest' in sys.argv or '-all' in sys.argv:
+        
+        from brunel_alpha_nest import runBrunelNetwork as runBrunelNetworkAlpha
+        
+        runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=1000, order=2500)
+        
+    if '-pynnnestsmall' in sys.argv or '-all' in sys.argv:
         
         sys.path.append("../PyNN")
         from brunel08 import runBrunelNetwork as runBrunelNetworkPyNN
         
-        runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=1000, order=10, simulator_name='nest', quick=True)
+        runParameterSweep(runBrunelNetworkPyNN, "pynn_nest", simtime=1000, order=50, simulator_name='nest', quick=True)
         
-    else:
+    if '-pynnneuronsmall' in sys.argv or '-all' in sys.argv:
+        
+        sys.path.append("../PyNN")
+        from brunel08 import runBrunelNetwork as runBrunelNetworkPyNN
+        
+        ### Why does this take ages?? Accmulating something in memory??
+        runParameterSweep(runBrunelNetworkPyNN, "pynn_neuron", simtime=1000, order=50, simulator_name='neuron', quick=True) 
+        
+    if len(sys.argv)==1:
         simtime = 1000.0
         order = 500
 
