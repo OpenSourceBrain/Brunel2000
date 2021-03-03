@@ -5,26 +5,26 @@ dist: bionic  # bionic + py3.6 required for building Nest using omv...
 addons:
   apt:
     packages:
-    - python-pip # use latest 
+    - python-pip # use latest
        # Requirements for Brian & NEST
-    - python-numpy 
-    - python-scipy 
-    - python-matplotlib 
+    - python-numpy
+    - python-scipy
+    - python-matplotlib
     - python-sympy
-    - python-tables 
+    - python-tables
     - python-tornado
-    - libreadline6-dev 
-    - libncurses5-dev 
+    - libreadline6-dev
+    - libncurses5-dev
     - libgsl0-dev
     - cython
 
 language: python
 
 python:
-    - 2.7
+    #- 2.7 # disables for now...
     - 3.6  # bionic + py3.6 required for building Nest using omv...
 
-    
+
 env:
     #- OMV_ENGINE=PyNEST:2.12.0   # try a specific version of NEST
     #- OMV_ENGINE=PyNEST:2.14.0   # try a specific version of NEST
@@ -39,7 +39,7 @@ env:
     - OMV_ENGINE=jNeuroML
     - OMV_ENGINE=jNeuroML_NEURON
 
-install: 
+install:
     - pip install git+https://github.com/OpenSourceBrain/osb-model-validation
     - pip install scipy # Why is this needed? Doesn't seem to get installed correctly on trusty with addons above...
 
@@ -47,8 +47,3 @@ script:
     - pwd
     - omv all -V --ignore-non-py3  # will ignore Brian1 tests when run on py3
     - omv list -V
-    
-    
-    
-    
-
