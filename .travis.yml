@@ -1,7 +1,6 @@
 # Framework for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
 
-dist: xenial
-sudo: false
+dist: bionic  # bionic + py3.6 required for building Nest using omv...
 
 addons:
   apt:
@@ -21,16 +20,17 @@ addons:
 
 language: python
 
-python: 2.7
+python:
+    - 2.7
+    - 3.6  # bionic + py3.6 required for building Nest using omv...
 
-virtualenv:
-    system_site_packages: true
     
 env:
-    - OMV_ENGINE=PyNEST:2.12.0   # try a specific version of NEST
-    - OMV_ENGINE=PyNEST:2.14.0   # try a specific version of NEST
+    #- OMV_ENGINE=PyNEST:2.12.0   # try a specific version of NEST
+    #- OMV_ENGINE=PyNEST:2.14.0   # try a specific version of NEST
     - OMV_ENGINE=PyNEST:2.16.0   # try a specific version of NEST
     - OMV_ENGINE=PyNEST:2.18.0   # try a specific version of NEST
+    - OMV_ENGINE=PyNEST:2.20.0   # try a specific version of NEST
     - OMV_ENGINE=PyNN_Nest
     - OMV_ENGINE=PyNN_NEURON
     - OMV_ENGINE=PyNN_Brian1
@@ -45,7 +45,7 @@ install:
 
 script:
     - pwd
-    - omv all -V
+    - omv all -V --ignore-non-py3  # will ignore Brian1 tests when run on py3
     - omv list -V
     
     
