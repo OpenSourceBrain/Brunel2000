@@ -30,6 +30,7 @@ jobs:
 
     - name: Test some scripts
       run: |
+        pip install pyneuroml
         omv install PyNN
         ./regenerate.sh
 
