@@ -2,9 +2,9 @@
     
     <!-- 
     This LEMS file has been generated from: 
-        PyNN v0.9.4
-        libNeuroML v0.2.51
-        pyNeuroML v0.5.3
+        PyNN v0.9.6
+        libNeuroML v0.2.58
+        pyNeuroML v0.5.18
      -->
     
     <!-- Specify which component to run -->
@@ -21,13 +21,13 @@
     <Simulation id="Sim_BrunelFromPyNN" length="1000.0ms" step="0.025ms" target="BrunelFromPyNN" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
         
         <Display id="E_net_v" title="E_net v" timeScale="1ms" xmin="-100.0" xmax="1100.0" ymin="-70" ymax="10">
-            <Line id="E_net v: cell 42" quantity="E_net/0/IF_curr_alpha_E_net/v" scale="1mV" color="#6aa799" timeScale="1ms"/>
-            <Line id="E_net v: cell 43" quantity="E_net/1/IF_curr_alpha_E_net/v" scale="1mV" color="#029a72" timeScale="1ms"/>
+            <Line id="E_net v: cell 42" quantity="E_net/0/IF_curr_alpha_E_net/v" scale="1mV" color="#d54f33" timeScale="1ms"/>
+            <Line id="E_net v: cell 43" quantity="E_net/1/IF_curr_alpha_E_net/v" scale="1mV" color="#0534e4" timeScale="1ms"/>
         </Display>
         
         <Display id="I_net_v" title="I_net v" timeScale="1ms" xmin="-100.0" xmax="1100.0" ymin="-70" ymax="10">
-            <Line id="I_net v: cell 62" quantity="I_net/0/IF_curr_alpha_I_net/v" scale="1mV" color="#d340bb" timeScale="1ms"/>
-            <Line id="I_net v: cell 63" quantity="I_net/1/IF_curr_alpha_I_net/v" scale="1mV" color="#4c73a9" timeScale="1ms"/>
+            <Line id="I_net v: cell 62" quantity="I_net/0/IF_curr_alpha_I_net/v" scale="1mV" color="#98e752" timeScale="1ms"/>
+            <Line id="I_net v: cell 63" quantity="I_net/1/IF_curr_alpha_I_net/v" scale="1mV" color="#bca074" timeScale="1ms"/>
         </Display>
         
         <OutputFile id="OF_E_net_v" fileName="E_net_v.dat">
@@ -95,11 +95,11 @@
         </EventOutputFile>
         
         <EventOutputFile id="Spikes_file_inpoisson" fileName="inpoisson.spikes" format="TIME_ID">
+            <EventSelection id="0" select="inpoisson/0/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
             <EventSelection id="1" select="inpoisson/1/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
             <EventSelection id="2" select="inpoisson/2/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
             <EventSelection id="3" select="inpoisson/3/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
             <EventSelection id="4" select="inpoisson/4/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
-            <EventSelection id="0" select="inpoisson/0/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
         </EventOutputFile>
         
     </Simulation>
