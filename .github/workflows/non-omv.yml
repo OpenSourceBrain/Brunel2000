@@ -1,5 +1,5 @@
 
-name: Continuous build using OMV
+name: Non OMV test scripts
 
 on:
   push:
