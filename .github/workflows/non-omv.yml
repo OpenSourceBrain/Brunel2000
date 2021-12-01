@@ -31,7 +31,7 @@ jobs:
     - name: Test some scripts
       run: |
         omv install PyNN
-        ./regenerate.py
+        ./regenerate.sh
 
     - name: OMV final version info
       run: |
