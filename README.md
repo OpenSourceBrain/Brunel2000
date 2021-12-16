@@ -4,7 +4,7 @@ Sparsely connected spiking neuron network from: [Brunel, Dynamics of Sparsely Co
 
 Comparison of the Brunel 2000 model across implementations has started [here](NEST/README.md).
 
-[![Build Status](https://travis-ci.com/OpenSourceBrain/Brunel2000.svg?branch=master)](https://travis-ci.com/OpenSourceBrain/Brunel2000)
+[![Continuous build using OMV](https://github.com/OpenSourceBrain/Brunel2000/actions/workflows/omv-ci.yml/badge.svg)](https://github.com/OpenSourceBrain/Brunel2000/actions/workflows/omv-ci.yml) [![Non OMV test scripts](https://github.com/OpenSourceBrain/Brunel2000/actions/workflows/non-omv.yml/badge.svg)](https://github.com/OpenSourceBrain/Brunel2000/actions/workflows/non-omv.yml)
 
 [![DOI](https://www.zenodo.org/badge/9031229.svg)](https://www.zenodo.org/badge/latestdoi/9031229)
 
