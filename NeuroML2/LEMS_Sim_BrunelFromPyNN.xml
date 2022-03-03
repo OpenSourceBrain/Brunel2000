@@ -3,8 +3,8 @@
     <!-- 
     This LEMS file has been generated from: 
         PyNN v0.9.6
-        libNeuroML v0.2.58
-        pyNeuroML v0.5.18
+        libNeuroML v0.3.2
+        pyNeuroML v0.6.0
      -->
     
     <!-- Specify which component to run -->
