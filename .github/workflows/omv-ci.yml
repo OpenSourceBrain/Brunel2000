@@ -14,20 +14,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.7 ]
+        python-version: [ 3.7, 3.9 ]
         engine: [ PyNEST, PyNN_Nest, PyNN_NEURON, PyNN_NeuroML, jNeuroML_validate, jNeuroML, jNeuroML_NEURON ]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     
     - name: Set up Python  ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version:  ${{ matrix.python-version }}
         
     - name: Install OMV
       run: |
-        pip install git+https://github.com/OpenSourceBrain/osb-model-validation
+        pip install git+https://github.com/OpenSourceBrain/osb-model-validation@test_pynn0101 
         pip install scipy sympy matplotlib cython pandas tables
         
     - name: Run OMV tests on engine ${{ matrix.engine }}
