@@ -28,6 +28,8 @@ jobs:
       run: |
         pip install git+https://github.com/OpenSourceBrain/osb-model-validation@test_pynn0101 
 
+        pip install 'numpy<=1.23.0' # see https://github.com/OpenSourceBrain/osb-model-validation/issues/91
+
     - name: Test some scripts
       run: |
         pip install pyneuroml
