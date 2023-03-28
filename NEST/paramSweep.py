@@ -51,7 +51,7 @@ import numpy as np
 import pylab as pl
 
 
-def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, simulator_name=None, jnml_simulator=None, quick=False):
+def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, N_rec=100, simulator_name=None, jnml_simulator=None, quick=False):
     ## ratio inhibitory weight/excitatory weight
     g_rng = np.arange(3, 9, .5)
     ## external rate relative to threshold rate
@@ -90,7 +90,7 @@ def runParameterSweep(runBrunelNetwork, label, simtime = 1000.0, order = 2500, s
                                               simtime=simtime, 
                                               dt = dt,
                                               order=order, 
-                                              N_rec=NE, 
+                                              N_rec=N_rec, 
                                               simulator_name=simulator_name,
                                               jnml_simulator=jnml_simulator)
 
@@ -206,7 +206,7 @@ if __name__ == '__main__':
         
         from brunel_alpha_nest import runBrunelNetwork as runBrunelNetworkAlpha
         
-        runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=1000, order=50, quick=True)
+        runParameterSweep(runBrunelNetworkAlpha, "alpha", simtime=1000, order=50, N_rec=50, quick=True)
         
     if '-nest' in sys.argv or '-all' in sys.argv:
         

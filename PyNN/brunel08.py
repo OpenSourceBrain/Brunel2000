@@ -232,6 +232,14 @@ def runBrunelNetwork(g=5.,
     print("Done")
     simCPUTime = timer.elapsedTime()
 
+
+    def get_source_id(spiketrain):
+        if 'source_id' in spiketrain.annotations:
+            return spiketrain.annotations['source_id']
+            
+        elif 'channel_id' in spiketrain.annotations: # See https://github.com/NeuralEnsemble/PyNN/pull/762
+            return spiketrain.annotations['channel_id']
+
     # write data to file
     if save and not simulator_name=='neuroml':
         import numpy
@@ -241,10 +249,10 @@ def runBrunelNetwork(g=5.,
             
             spikes =  pop.get_data('spikes', gather=False)
             spiketrains = spikes.segments[0].spiketrains
-            print('Saving data recorded for spikes in pop %s, indices: %s to %s'%(pop.label, [s.annotations['source_id'] for s in spiketrains], filename))
+            print('Saving data recorded for spikes in pop %s, indices: %s to %s'%(pop.label, [get_source_id(s) for s in spiketrains], filename))
             for spiketrain in spiketrains:
-                source_id = spiketrain.annotations['source_id']
-                source_index = spiketrain.annotations['source_index']
+                source_id = get_source_id(spiketrain)
+                source_index = pop.id_to_index(source_id)
                 '''
                 print("Writing spike data for cell %s[%s] (gid: %i): %i spikes: [%s,...,%s] "% \
                       (pop.label,
