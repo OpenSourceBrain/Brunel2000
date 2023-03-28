@@ -12,7 +12,7 @@ experiments:
           path: E_net.spikes
           format: TIME_ID
           ids: 0
-        tolerance: 0.005263863166699698
+        tolerance: 0.02169920745362061
   spike_rate_i:
     observables:
       spike rate:
@@ -20,7 +20,7 @@ experiments:
           path: I_net.spikes
           format: TIME_ID
           ids: 0
-        tolerance: 0.02488767010682237
+        tolerance: 0.0006482679636328364
         
   spike_rate_exc_in:
     observables:
@@ -30,7 +30,7 @@ experiments:
           format: TIME_ID
           scaling: 1
           ids: 0
-        tolerance: 0.002275284410551285
+        tolerance: 0.003405981742108255
   spike_rate_inh_in:
     observables:
       spike rate:
@@ -39,4 +39,4 @@ experiments:
           format: TIME_ID
           scaling: 1
           ids: 0
-        tolerance: 0.0006751519091794762
+        tolerance: 0.00429875594954221

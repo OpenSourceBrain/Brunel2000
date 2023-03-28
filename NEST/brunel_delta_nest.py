@@ -41,9 +41,7 @@ network are recorded.
 Importing all necessary modules for simulation, analysis and plotting.
 '''
 import sys
-
 import nest
-
 import time
 
 def runBrunelNetwork(g=5., 
@@ -144,7 +142,9 @@ def runBrunelNetwork(g=5.,
     total simulation time.
     '''
 
-    nest.SetKernelStatus({"resolution": dt, "print_time": True, "overwrite_files": True, 'local_num_threads': local_num_threads})
+    nest.resolution = dt
+    nest.print_time = True
+    nest.overwrite_files = True
 
     print("Building network")
 
@@ -171,9 +171,9 @@ def runBrunelNetwork(g=5.,
     nodes_in = nest.Create("iaf_psc_delta",NI)
     nodes_all = nodes_ex+nodes_in
     noise    = nest.Create("poisson_generator")
-    espikes  = nest.Create("spike_detector")
-    ispikes  = nest.Create("spike_detector")
-    all_spikes  = nest.Create("spike_detector")
+    espikes = nest.Create("spike_recorder")
+    ispikes = nest.Create("spike_recorder")
+    all_spikes  = nest.Create("spike_recorder")
 
     '''
     Configuration of the spike detectors recording excitatory and
@@ -185,20 +185,9 @@ def runBrunelNetwork(g=5.,
     stating the gid of the spiking neuron and the spike time in one line.
     '''
 
-    nest.SetStatus(espikes,[{"label": "brunel-py-ex",
-                             "withtime": True,
-                             "withgid": True,
-                             "to_file": save}])
 
-    nest.SetStatus(ispikes,[{"label": "brunel-py-in",
-                             "withtime": True,
-                             "withgid": True,
-                             "to_file": save}])
-
-    nest.SetStatus(all_spikes,[{"label": "brunel-py-all",
-                             "withtime": True,
-                             "withgid": True,
-                             "to_file": False}])
+    espikes.set(label="brunel-py-ex", record_to="ascii")
+    ispikes.set(label="brunel-py-in", record_to="ascii")
 
     print("Connecting devices")
 
@@ -254,7 +243,7 @@ def runBrunelNetwork(g=5.,
     '''
 
     conn_params_ex = {'rule': 'fixed_indegree', 'indegree': CE}
-    nest.Connect(nodes_ex, nodes_ex+nodes_in, conn_params_ex, "excitatory")
+    nest.Connect(nodes_ex, nodes_ex + nodes_in, conn_params_ex, "excitatory")
 
     print("Inhibitory connections")
 
