@@ -5,19 +5,29 @@
 #
 
 import nest
-from scipy.special import lambertw
 
-import numpy
-from numpy import exp
+import numpy as np
+import scipy.special as sp
 
 import time
 
 
-def computePSPnorm(tauMem, CMem, tauSyn):
+def LambertWm1(x):
+    # Using scipy to mimic the gsl_sf_lambert_Wm1 function.
+    return sp.lambertw(x, k=-1 if x < 0 else 0).real
+
+
+def ComputePSPnorm(tauMem, CMem, tauSyn):
     a = (tauMem / tauSyn)
     b = (1.0 / tauSyn - 1.0 / tauMem)
-    t_max = 1.0 / b * (-lambertw(-exp(-1.0 / a) / a, k=-1).real - 1.0 / a)
-    return exp(1.0) / (tauSyn * CMem * b) * ((exp(-t_max / tauMem) - exp(-t_max / tauSyn)) / b - t_max * exp(-t_max / tauSyn))
+
+    # time of maximum
+    t_max = 1.0 / b * (-LambertWm1(-np.exp(-1.0 / a) / a) - 1.0 / a)
+
+    # maximum of PSP for current of unit amplitude
+    return (np.exp(1.0) / (tauSyn * CMem * b) *
+            ((np.exp(-t_max / tauMem) - np.exp(-t_max / tauSyn)) / b -
+             t_max * np.exp(-t_max / tauSyn)))
 
 
 
@@ -61,18 +71,19 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
                      "V_m":        0.0,
                      "V_th":       theta}
     J = 0.1        # postsynaptic amplitude in mV
-    J_unit = computePSPnorm(tauMem, CMem, tauSyn)
+    J_unit = ComputePSPnorm(tauMem, CMem, tauSyn)
     J_ex = J / J_unit  # amplitude of excitatory postsynaptic current
     J_in = -g * J_ex    # amplitude of inhibitory postsynaptic current
 
 
-    nu_th = (theta * CMem) / (J_ex * CE * numpy.exp(1) * tauMem * tauSyn)
+    nu_th = (theta * CMem) / (J_ex * CE * np.exp(1) * tauMem * tauSyn)
     nu_ex = eta * nu_th
     p_rate = 1000.0 * nu_ex * CE
 
 
-    nest.SetKernelStatus(
-        {"resolution": dt, "print_time": True, "overwrite_files": True})
+    nest.resolution = dt
+    nest.print_time = True
+    nest.overwrite_files = True
 
     print("Building network")
 
@@ -83,24 +94,15 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
     nodes_in = nest.Create("iaf_psc_alpha", NI)
     nodes_all = nodes_ex+nodes_in
     noise = nest.Create("poisson_generator")
-    espikes = nest.Create("spike_detector")
-    ispikes = nest.Create("spike_detector")
-    all_spikes  = nest.Create("spike_detector")
+    espikes = nest.Create("spike_recorder")
+    ispikes = nest.Create("spike_recorder")
 
-    nest.SetStatus(espikes, [{"label": "brunel-py-ex",
-                              "withtime": True,
-                              "withgid": True,
-                              "to_file": save}])
+    all_spikes  = nest.Create("spike_recorder")
 
-    nest.SetStatus(ispikes, [{"label": "brunel-py-in",
-                              "withtime": True,
-                              "withgid": True,
-                              "to_file": save}])
 
-    nest.SetStatus(all_spikes,[{"label": "brunel-py-all",
-                             "withtime": True,
-                             "withgid": True,
-                             "to_file": False}])
+    espikes.set(label="brunel-py-ex", record_to="ascii")
+    ispikes.set(label="brunel-py-in", record_to="ascii")
+
 
     print("Connecting devices")
 
@@ -119,16 +121,31 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
 
     print("Connecting network")
 
-    numpy.random.seed(1234)
+    np.random.seed(1234)
 
-    sources_ex = numpy.random.random_integers(1, NE, (N_neurons, CE))
-    sources_in = numpy.random.random_integers(NE + 1, N_neurons, (N_neurons, CI))
+    print("Excitatory connections")
 
-    for n in range(N_neurons):
-        nest.Connect(list(sources_ex[n]), [n + 1], syn_spec="excitatory")
+    ###############################################################################
+    # Connecting the excitatory population to all neurons using the pre-defined
+    # excitatory synapse. Beforehand, the connection parameter are defined in a
+    # dictionary. Here we use the connection rule ``fixed_indegree``,
+    # which requires the definition of the indegree. Since the synapse
+    # specification is reduced to assigning the pre-defined excitatory synapse it
+    # suffices to insert a string.
 
-    for n in range(N_neurons):
-        nest.Connect(list(sources_in[n]), [n + 1], syn_spec="inhibitory")
+    conn_params_ex = {'rule': 'fixed_indegree', 'indegree': CE}
+    nest.Connect(nodes_ex, nodes_ex + nodes_in, conn_params_ex, "excitatory")
+
+    print("Inhibitory connections")
+
+    ###############################################################################
+    # Connecting the inhibitory population to all neurons using the pre-defined
+    # inhibitory synapse. The connection parameter as well as the synapse
+    # parameter are defined analogously to the connection from the excitatory
+    # population defined above.
+
+    conn_params_in = {'rule': 'fixed_indegree', 'indegree': CI}
+    nest.Connect(nodes_in, nodes_ex + nodes_in, conn_params_in, "inhibitory")
 
 
     endbuild = time.time()
