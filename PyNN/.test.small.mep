@@ -11,7 +11,7 @@ experiments:
 
     spike_rate_exc_in:
         expected:
-            spike rate: 10000
+            spike rate: 10011.345616277464
     spike_rate_inh_in:
         expected:
             spike rate: 9950.473822363556

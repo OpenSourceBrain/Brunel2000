@@ -28,6 +28,10 @@ def runBrunelNetwork(g=5.,
                      jnml_simulator=None,
                      extra = {}):
 
+    if simulator_name=='brian2':
+        from brian2 import seed
+        seed(1234)
+
     sim = import_module("pyNN.%s" % simulator_name)
     
     timer = Timer()
