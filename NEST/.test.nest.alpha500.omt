@@ -9,8 +9,8 @@ experiments:
     observables:
       spike rate:
         spiketimes file: 
-          path: brunel-py-ex-502-0.gdf
-          format: ID_TIME
+          path: brunel-py-ex-502-0.dat
+          format: ID_TIME_NEST_DAT
           scaling: 0.001
           ids: '*'
         tolerance: 1.9978618179684424e-05  # due to small differences between nest 2.12/2.14 and 2.16
@@ -18,8 +18,8 @@ experiments:
     observables:
       spike rate:
         spiketimes file: 
-          path: brunel-py-in-503-0.gdf
-          format: ID_TIME
+          path: brunel-py-in-503-0.dat
+          format: ID_TIME_NEST_DAT
           scaling: 0.001
           ids: '*'
         tolerance: 8.651549318282133e-06   # due to small differences between nest 2.12/2.14 and 2.16

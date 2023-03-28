@@ -34,6 +34,10 @@ def ComputePSPnorm(tauMem, CMem, tauSyn):
 def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsilon = 0.1, order = 2500, N_rec = 50, save=False, simulator_name='nest',jnml_simulator=None):
 
     nest.ResetKernel()
+    nest.rng_type = 'Philox_32'
+    nest.rng_seed = 1234
+    print('NEST RNG type: %s, seed: %s'%(nest.rng_type, nest.rng_seed))
+
     startbuild = time.time()
 
     dt = dt    # the resolution in ms
@@ -50,6 +54,8 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
     NI = 1 * order  # number of inhibitory neurons
     N_neurons = NE + NI   # number of neurons in total
     N_rec = N_rec      # record from 50 neurons
+    
+    print('Simulating %i exc and %i inh neurons (%i total), recording %i'%(NE, NI, N_neurons, N_rec))
 
 
     CE = int(epsilon * NE)  # number of excitatory synapses per neuron
@@ -120,8 +126,6 @@ def runBrunelNetwork(g=5., eta=2., dt = 0.1, simtime = 1000.0, delay = 1.5, epsi
     nest.Connect(nodes_all, all_spikes, syn_spec="excitatory")
 
     print("Connecting network")
-
-    np.random.seed(1234)
 
     print("Excitatory connections")
 
