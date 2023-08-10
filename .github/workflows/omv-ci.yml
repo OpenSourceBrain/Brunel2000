@@ -10,12 +10,14 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    name: Check ${{ matrix.engine }} on ${{ matrix.runs-on }}, Python v${{ matrix.python-version }} 
+    runs-on: ${{ matrix.runs-on }}
     strategy:
       fail-fast: false
       matrix:
         python-version: [ 3.9 ]
         engine: [ PyNEST, PyNN_Nest, PyNN_NEURON, PyNN_Brian2, PyNN_NeuroML, jNeuroML_validate, jNeuroML, jNeuroML_NEURON ]
+        runs-on: [ ubuntu-latest, macos-latest ]
 
     steps:
     - uses: actions/checkout@v3
