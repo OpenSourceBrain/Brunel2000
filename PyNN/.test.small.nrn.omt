@@ -13,7 +13,7 @@ experiments:
           format: TIME_ID
           scaling: 0.001
           ids: '*'
-        tolerance: 0.04567485670785096
+        tolerance: 0.009998853340826097
   spike_rate_i:
     observables:
       spike rate:
