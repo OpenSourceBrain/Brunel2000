@@ -14,8 +14,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.8, 3.9, "3.10" ]
-        engine: [ PyNEST, PyNN_Nest, PyNN_NEURON, PyNN_Brian2, PyNN_NeuroML, jNeuroML_validate, jNeuroML, jNeuroML_NEURON ]
+        python-version: [ 3.8,  "3.10" ]
+        engine: [ PyNEST, "PyNEST:3.4", "PyNEST:3.5", PyNN_Nest, PyNN_NEURON, PyNN_Brian2, PyNN_NeuroML, jNeuroML_validate, jNeuroML, jNeuroML_NEURON ]
         exclude:
            - python-version: 3.8
              engine: PyNN_Brian2
