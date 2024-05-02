@@ -31,6 +31,7 @@ jobs:
     - name: Install OMV
       run: |
         pip install cython # required to build NEST...
+        pip install scipy # required for NEST examples...
 
         pip install git+https://github.com/OpenSourceBrain/osb-model-validation@test_pynn011
         
