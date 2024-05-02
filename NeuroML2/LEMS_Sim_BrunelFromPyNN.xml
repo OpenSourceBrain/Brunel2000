@@ -1,12 +1,12 @@
 <Lems>
-    
+
     <!-- 
     This LEMS file has been generated from: 
         PyNN v0.10.1
-        libNeuroML v0.5.5
-        pyNeuroML v1.1.1
+        libNeuroML v0.5.9
+        pyNeuroML v1.2.13
      -->
-    
+
     <!-- Specify which component to run -->
     <Target component="Sim_BrunelFromPyNN"/>
 
@@ -14,94 +14,93 @@
     <Include file="Cells.xml"/>
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
-    
+
     <Include file="PyNN.xml"/>
     <Include file="BrunelFromPyNN.net.nml"/>
-   
+
     <Simulation id="Sim_BrunelFromPyNN" length="1000.0ms" step="0.025ms" target="BrunelFromPyNN" seed="12345">  <!-- Note seed: ensures same random numbers used every run -->
-        
         <Display id="E_net_v" title="E_net v" timeScale="1ms" xmin="-100.0" xmax="1100.0" ymin="-70" ymax="10">
             <Line id="E_net v: cell 42" quantity="E_net/0/IF_curr_alpha_E_net/v" scale="1mV" color="#d54f33" timeScale="1ms"/>
             <Line id="E_net v: cell 43" quantity="E_net/1/IF_curr_alpha_E_net/v" scale="1mV" color="#0534e4" timeScale="1ms"/>
         </Display>
-        
+
         <Display id="I_net_v" title="I_net v" timeScale="1ms" xmin="-100.0" xmax="1100.0" ymin="-70" ymax="10">
             <Line id="I_net v: cell 62" quantity="I_net/0/IF_curr_alpha_I_net/v" scale="1mV" color="#98e752" timeScale="1ms"/>
             <Line id="I_net v: cell 63" quantity="I_net/1/IF_curr_alpha_I_net/v" scale="1mV" color="#bca074" timeScale="1ms"/>
         </Display>
-        
+
         <OutputFile id="OF_E_net_v" fileName="E_net_v.dat">
-            <OutputColumn id="E_net_0_IF_curr_alpha_E_net_v" quantity="E_net/0/IF_curr_alpha_E_net/v"/> 
-            <OutputColumn id="E_net_1_IF_curr_alpha_E_net_v" quantity="E_net/1/IF_curr_alpha_E_net/v"/> 
+            <OutputColumn id="E_net_0_IF_curr_alpha_E_net_v" quantity="E_net/0/IF_curr_alpha_E_net/v"/>
+            <OutputColumn id="E_net_1_IF_curr_alpha_E_net_v" quantity="E_net/1/IF_curr_alpha_E_net/v"/>
         </OutputFile>
-        
+
         <OutputFile id="OF_I_net_v" fileName="I_net_v.dat">
-            <OutputColumn id="I_net_0_IF_curr_alpha_I_net_v" quantity="I_net/0/IF_curr_alpha_I_net/v"/> 
-            <OutputColumn id="I_net_1_IF_curr_alpha_I_net_v" quantity="I_net/1/IF_curr_alpha_I_net/v"/> 
+            <OutputColumn id="I_net_0_IF_curr_alpha_I_net_v" quantity="I_net/0/IF_curr_alpha_I_net/v"/>
+            <OutputColumn id="I_net_1_IF_curr_alpha_I_net_v" quantity="I_net/1/IF_curr_alpha_I_net/v"/>
         </OutputFile>
-        
+
         <EventOutputFile id="Spikes_file_E_net" fileName="E_net.spikes" format="TIME_ID">
-            <EventSelection id="0" select="E_net/0/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="1" select="E_net/1/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="2" select="E_net/2/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="3" select="E_net/3/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="4" select="E_net/4/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="5" select="E_net/5/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="6" select="E_net/6/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="7" select="E_net/7/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="8" select="E_net/8/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="9" select="E_net/9/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="10" select="E_net/10/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="11" select="E_net/11/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="12" select="E_net/12/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="13" select="E_net/13/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="14" select="E_net/14/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="15" select="E_net/15/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="16" select="E_net/16/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="17" select="E_net/17/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="18" select="E_net/18/IF_curr_alpha_E_net" eventPort="spike"/> 
-            <EventSelection id="19" select="E_net/19/IF_curr_alpha_E_net" eventPort="spike"/> 
+            <EventSelection id="0" select="E_net/0/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="1" select="E_net/1/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="2" select="E_net/2/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="3" select="E_net/3/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="4" select="E_net/4/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="5" select="E_net/5/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="6" select="E_net/6/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="7" select="E_net/7/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="8" select="E_net/8/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="9" select="E_net/9/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="10" select="E_net/10/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="11" select="E_net/11/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="12" select="E_net/12/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="13" select="E_net/13/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="14" select="E_net/14/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="15" select="E_net/15/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="16" select="E_net/16/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="17" select="E_net/17/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="18" select="E_net/18/IF_curr_alpha_E_net" eventPort="spike"/>
+            <EventSelection id="19" select="E_net/19/IF_curr_alpha_E_net" eventPort="spike"/>
         </EventOutputFile>
-        
+
         <EventOutputFile id="Spikes_file_I_net" fileName="I_net.spikes" format="TIME_ID">
-            <EventSelection id="2" select="I_net/2/IF_curr_alpha_I_net" eventPort="spike"/> 
-            <EventSelection id="3" select="I_net/3/IF_curr_alpha_I_net" eventPort="spike"/> 
-            <EventSelection id="4" select="I_net/4/IF_curr_alpha_I_net" eventPort="spike"/> 
-            <EventSelection id="0" select="I_net/0/IF_curr_alpha_I_net" eventPort="spike"/> 
-            <EventSelection id="1" select="I_net/1/IF_curr_alpha_I_net" eventPort="spike"/> 
+            <EventSelection id="2" select="I_net/2/IF_curr_alpha_I_net" eventPort="spike"/>
+            <EventSelection id="3" select="I_net/3/IF_curr_alpha_I_net" eventPort="spike"/>
+            <EventSelection id="4" select="I_net/4/IF_curr_alpha_I_net" eventPort="spike"/>
+            <EventSelection id="0" select="I_net/0/IF_curr_alpha_I_net" eventPort="spike"/>
+            <EventSelection id="1" select="I_net/1/IF_curr_alpha_I_net" eventPort="spike"/>
         </EventOutputFile>
-        
+
         <EventOutputFile id="Spikes_file_expoisson" fileName="expoisson.spikes" format="TIME_ID">
-            <EventSelection id="0" select="expoisson/0/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="1" select="expoisson/1/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="2" select="expoisson/2/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="3" select="expoisson/3/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="4" select="expoisson/4/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="5" select="expoisson/5/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="6" select="expoisson/6/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="7" select="expoisson/7/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="8" select="expoisson/8/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="9" select="expoisson/9/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="10" select="expoisson/10/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="11" select="expoisson/11/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="12" select="expoisson/12/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="13" select="expoisson/13/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="14" select="expoisson/14/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="15" select="expoisson/15/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="16" select="expoisson/16/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="17" select="expoisson/17/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="18" select="expoisson/18/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
-            <EventSelection id="19" select="expoisson/19/SpikeSourcePoisson_expoisson" eventPort="spike"/> 
+            <EventSelection id="0" select="expoisson/0/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="1" select="expoisson/1/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="2" select="expoisson/2/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="3" select="expoisson/3/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="4" select="expoisson/4/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="5" select="expoisson/5/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="6" select="expoisson/6/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="7" select="expoisson/7/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="8" select="expoisson/8/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="9" select="expoisson/9/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="10" select="expoisson/10/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="11" select="expoisson/11/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="12" select="expoisson/12/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="13" select="expoisson/13/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="14" select="expoisson/14/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="15" select="expoisson/15/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="16" select="expoisson/16/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="17" select="expoisson/17/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="18" select="expoisson/18/SpikeSourcePoisson_expoisson" eventPort="spike"/>
+            <EventSelection id="19" select="expoisson/19/SpikeSourcePoisson_expoisson" eventPort="spike"/>
         </EventOutputFile>
-        
+
         <EventOutputFile id="Spikes_file_inpoisson" fileName="inpoisson.spikes" format="TIME_ID">
-            <EventSelection id="0" select="inpoisson/0/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
-            <EventSelection id="1" select="inpoisson/1/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
-            <EventSelection id="2" select="inpoisson/2/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
-            <EventSelection id="3" select="inpoisson/3/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
-            <EventSelection id="4" select="inpoisson/4/SpikeSourcePoisson_inpoisson" eventPort="spike"/> 
+            <EventSelection id="0" select="inpoisson/0/SpikeSourcePoisson_inpoisson" eventPort="spike"/>
+            <EventSelection id="1" select="inpoisson/1/SpikeSourcePoisson_inpoisson" eventPort="spike"/>
+            <EventSelection id="2" select="inpoisson/2/SpikeSourcePoisson_inpoisson" eventPort="spike"/>
+            <EventSelection id="3" select="inpoisson/3/SpikeSourcePoisson_inpoisson" eventPort="spike"/>
+            <EventSelection id="4" select="inpoisson/4/SpikeSourcePoisson_inpoisson" eventPort="spike"/>
         </EventOutputFile>
-        
+
     </Simulation>
 
 </Lems>
