@@ -26,9 +26,7 @@ jobs:
 
     - name: Install OMV
       run: |
-        pip install git+https://github.com/OpenSourceBrain/osb-model-validation 
-
-        pip install 'numpy<=1.23.0' # see https://github.com/OpenSourceBrain/osb-model-validation/issues/91
+        pip install git+https://github.com/OpenSourceBrain/osb-model-validation@test_pynn011
 
     - name: Test some scripts
       run: |
