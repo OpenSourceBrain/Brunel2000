@@ -2,9 +2,9 @@
 
     <!-- 
     This LEMS file has been generated from: 
-        PyNN v0.10.1
-        libNeuroML v0.5.9
-        pyNeuroML v1.2.13
+        PyNN v0.11.0
+        libNeuroML v0.6.3
+        pyNeuroML v1.3.7
      -->
 
     <!-- Specify which component to run -->
