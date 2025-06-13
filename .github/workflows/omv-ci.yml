@@ -28,8 +28,8 @@ jobs:
     - name: Install OMV
       run: |
         pip install git+https://github.com/OpenSourceBrain/osb-model-validation
-        
-        pip install matplotlib "cython<3.1.0"  # let omv handle other deps...
+
+        pip install scipy sympy matplotlib "cython<3.1.0" pandas tables
         
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |
