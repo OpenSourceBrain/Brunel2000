@@ -28,13 +28,12 @@ jobs:
       run: |
         pip install git+https://github.com/OpenSourceBrain/osb-model-validation 
 
-        #pip install 'numpy<=1.23.0' # see https://github.com/OpenSourceBrain/osb-model-validation/issues/91
-
     - name: Test some scripts
       run: |
         pip install pyneuroml
         omv install PyNN
         ./regenerate.sh
+        omv all -V  
 
     - name: OMV final version info
       run: |
