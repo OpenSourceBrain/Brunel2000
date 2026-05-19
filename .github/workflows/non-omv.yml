@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.9, "3.10", "3.12"]
+        python-version: [ "3.12", "3.13" ]
 
     steps:
     - uses: actions/checkout@v6
@@ -28,6 +28,7 @@ jobs:
       run: |
         pip install git+https://github.com/OpenSourceBrain/osb-model-validation 
         
+        pip install 'numpy==2.2.6' # TODO: remove when pynn v0.12 used!
         pip install scipy sympy matplotlib "cython<3.1.0" pandas tables
 
     - name: Test some scripts
