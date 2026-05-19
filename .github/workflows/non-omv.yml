@@ -14,27 +14,29 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.9, "3.10", "3.11"]
+        python-version: [ "3.12", "3.13" ]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Set up Python  ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version:  ${{ matrix.python-version }}
 
     - name: Install OMV
       run: |
         pip install git+https://github.com/OpenSourceBrain/osb-model-validation 
-
-        #pip install 'numpy<=1.23.0' # see https://github.com/OpenSourceBrain/osb-model-validation/issues/91
+        
+        pip install 'numpy==2.2.6' # TODO: remove when pynn v0.12 used!
+        pip install scipy sympy matplotlib "cython<3.1.0" pandas tables
 
     - name: Test some scripts
       run: |
         pip install pyneuroml
         omv install PyNN
         ./regenerate.sh
+        omv all -V  
 
     - name: OMV final version info
       run: |
